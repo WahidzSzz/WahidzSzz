@@ -41,176 +41,7 @@ local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 
 -- Scripts:
 
-local function ZRSW_fake_script() -- Minimize.LocalScript 
-	local script = Instance.new('LocalScript', Minimize)
 
-	local holder = script.Parent.Parent.Parent.Parent.Holder
-	local ms = script.Parent
-	local openbutton = script.Parent.Parent.Parent.Parent.OpenButton
-	local TweenService = game:GetService("TweenService")
-	local UIS = game:GetService("UserInputService")
-
-	ms.MouseButton1Click:Connect(function()
-		local dropTween = TweenService:Create(openbutton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			Size = UDim2.new(0, 140,0, 40
-			)
-		})
-
-		local grownTween = TweenService:Create(holder, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			Size = UDim2.new(0
-			)
-		})
-
-		grownTween:Play()
-		dropTween:Play()
-		holder.Visible = false
-		openbutton.Visible = true
-	end)
-end
-coroutine.wrap(ZRSW_fake_script)()
-local function KKLXTNX_fake_script() -- Topbar.LocalScript 
-	local script = Instance.new('LocalScript', Topbar)
-
-	local UserInputService = game:GetService("UserInputService")
-
-	local gui = script.Parent.Parent.Parent.Holder
-	local topbar = script.Parent
-
-	local dragging
-	local dragInput
-	local dragStart
-	local startPos
-
-	local function update(input)
-		local delta = input.Position - dragStart
-		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-	end
-
-	topbar.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-			dragging = true
-			dragStart = input.Position
-			startPos = gui.Position
-
-			input.Changed:Connect(function()
-				if input.UserInputState == Enum.UserInputState.End then
-					dragging = false
-				end
-			end)
-		end
-	end)
-
-	topbar.InputChanged:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-			dragInput = input
-		end
-	end)
-
-	UserInputService.InputChanged:Connect(function(input)
-		if input == dragInput and dragging then
-			update(input)
-		end
-	end)
-end
-coroutine.wrap(KKLXTNX_fake_script)()
-local function FUIUA_fake_script() -- Trigger_2.LocalScript 
-	local script = Instance.new('LocalScript', Trigger_2)
-
-	local holder = script.Parent.Parent.Parent.Holder
-	local ms = script.Parent
-	local openbutton = script.Parent.Parent
-	local TweenService = game:GetService("TweenService")
-	local UIS = game:GetService("UserInputService")
-
-	ms.MouseButton1Click:Connect(function()
-		local dropTween = TweenService:Create(openbutton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			Size = UDim2.new(0, 0, 0, 0
-			)
-		})
-
-		local grownTween = TweenService:Create(holder, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			Size = UDim2.new(0, 400,0, 270
-			)
-		})
-
-		grownTween:Play()
-		dropTween:Play()
-		holder.Visible = true
-		openbutton.Visible = false
-	end)
-end
-coroutine.wrap(FUIUA_fake_script)()
-local function SYUYEJ_fake_script() -- OpenButton.LocalScript 
-	local script = Instance.new('LocalScript', OpenButton)
-
-	local UserInputService = game:GetService("UserInputService")
-
-	local gui = script.Parent
-
-
-	local dragging
-	local dragInput
-	local dragStart
-	local startPos
-
-	local function update(input)
-		local delta = input.Position - dragStart
-		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-	end
-
-	gui.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-			dragging = true
-			dragStart = input.Position
-			startPos = gui.Position
-
-			input.Changed:Connect(function()
-				if input.UserInputState == Enum.UserInputState.End then
-					dragging = false
-				end
-			end)
-		end
-	end)
-
-	gui.InputChanged:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-			dragInput = input
-		end
-	end)
-
-	UserInputService.InputChanged:Connect(function(input)
-		if input == dragInput and dragging then
-			update(input)
-		end
-	end)
-end
-coroutine.wrap(SYUYEJ_fake_script)()
-local function RBDCO_fake_script() -- No.LocalScript 
-	local script = Instance.new('LocalScript', No)
-
-	local ms = script.Parent
-	local holder = script.Parent.Parent.Parent.Holder
-	local frme = script.Parent.Parent.Parent.Dialog
-
-	ms.MouseButton1Click:Connect(function()
-
-		holder.Visible = true
-		frme.Visible = false
-	end)
-end
-coroutine.wrap(RBDCO_fake_script)()
-local function JXETR_fake_script() -- Yes.LocalScript 
-	local script = Instance.new('LocalScript', Yes)
-
-	local ms = script.Parent
-	local natui = script.Parent.Parent.Parent.Parent.NathubUI
-
-	ms.MouseButton1Click:Connect(function()
-
-		natui:Destroy()
-	end)
-end
-coroutine.wrap(JXETR_fake_script)()
 
 function Library:AddWindow(tbl)
 	local Title = tbl.Title
@@ -554,6 +385,177 @@ function Library:AddWindow(tbl)
 
 	UIListLayout.Parent = Container
 	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	
+	local function ZRSW_fake_script() -- Minimize.LocalScript 
+	local script = Instance.new('LocalScript', Minimize)
+
+	local holder = script.Parent.Parent.Parent.Parent.Holder
+	local ms = script.Parent
+	local openbutton = script.Parent.Parent.Parent.Parent.OpenButton
+	local TweenService = game:GetService("TweenService")
+	local UIS = game:GetService("UserInputService")
+
+	ms.MouseButton1Click:Connect(function()
+		local dropTween = TweenService:Create(openbutton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.new(0, 140,0, 40
+			)
+		})
+
+		local grownTween = TweenService:Create(holder, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.new(0
+			)
+		})
+
+		grownTween:Play()
+		dropTween:Play()
+		holder.Visible = false
+		openbutton.Visible = true
+	end)
+end
+coroutine.wrap(ZRSW_fake_script)()
+local function KKLXTNX_fake_script() -- Topbar.LocalScript 
+	local script = Instance.new('LocalScript', Topbar)
+
+	local UserInputService = game:GetService("UserInputService")
+
+	local gui = script.Parent.Parent.Parent.Holder
+	local topbar = script.Parent
+
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+
+	local function update(input)
+		local delta = input.Position - dragStart
+		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+
+	topbar.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+
+	topbar.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+
+	UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+end
+coroutine.wrap(KKLXTNX_fake_script)()
+local function FUIUA_fake_script() -- Trigger_2.LocalScript 
+	local script = Instance.new('LocalScript', Trigger_2)
+
+	local holder = script.Parent.Parent.Parent.Holder
+	local ms = script.Parent
+	local openbutton = script.Parent.Parent
+	local TweenService = game:GetService("TweenService")
+	local UIS = game:GetService("UserInputService")
+
+	ms.MouseButton1Click:Connect(function()
+		local dropTween = TweenService:Create(openbutton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.new(0, 0, 0, 0
+			)
+		})
+
+		local grownTween = TweenService:Create(holder, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.new(0, 400,0, 270
+			)
+		})
+
+		grownTween:Play()
+		dropTween:Play()
+		holder.Visible = true
+		openbutton.Visible = false
+	end)
+end
+coroutine.wrap(FUIUA_fake_script)()
+local function SYUYEJ_fake_script() -- OpenButton.LocalScript 
+	local script = Instance.new('LocalScript', OpenButton)
+
+	local UserInputService = game:GetService("UserInputService")
+
+	local gui = script.Parent
+
+
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+
+	local function update(input)
+		local delta = input.Position - dragStart
+		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+
+	gui.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+
+	gui.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+
+	UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+end
+coroutine.wrap(SYUYEJ_fake_script)()
+local function RBDCO_fake_script() -- No.LocalScript 
+	local script = Instance.new('LocalScript', No)
+
+	local ms = script.Parent
+	local holder = script.Parent.Parent.Parent.Holder
+	local frme = script.Parent.Parent.Parent.Dialog
+
+	ms.MouseButton1Click:Connect(function()
+
+		holder.Visible = true
+		frme.Visible = false
+	end)
+end
+coroutine.wrap(RBDCO_fake_script)()
+local function JXETR_fake_script() -- Yes.LocalScript 
+	local script = Instance.new('LocalScript', Yes)
+
+	local ms = script.Parent
+	local natui = script.Parent.Parent.Parent.Parent.NathubUI
+
+	ms.MouseButton1Click:Connect(function()
+
+		natui:Destroy()
+	end)
+end
+coroutine.wrap(JXETR_fake_script)()
 end
 
 function Library:AddSection(tbl)
