@@ -212,8 +212,10 @@ local function JXETR_fake_script() -- Yes.LocalScript
 end
 coroutine.wrap(JXETR_fake_script)()
 
-function Library:AddWindow(Title,Description,Icon)
-	
+function Library:AddWindow(tbl)
+	local Title = tbl.Title
+	local Description = tbl.Description
+	local Icon = tbl.Icon
 	
 	NathubLibrary.Name = "NathubLibrary"
 	NathubLibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -571,7 +573,9 @@ function Library:AddSection(tbl)
 	Section.TextSize = 18.000
 end
 
-function Library:AddToggle(Title,Callback)
+function Library:AddToggle(tbl)
+	local Title = tbl.Title
+	local Callback = tbl.Callback
 	local Toggle = Instance.new("Frame")
 	local Title = Instance.new("TextLabel")
 	local Checkbox = Instance.new("Frame")
@@ -637,6 +641,7 @@ function Library:AddToggle(Title,Callback)
 	})
 	unror:Play()
 	Check.Visible = false
+	pcall(Callback)
 end
 	end)
 
@@ -656,7 +661,9 @@ end
 	UICorner_5.Parent = Checkbox
 end
 
-function Library:AddButton(Title, Callback)
+function Library:AddButton(tbl)
+	local Title = tbl.Title
+	local Callback = tbl.Callback
 	local Button = Instance.new("Frame")
 	local Title_2 = Instance.new("TextLabel")
 	local Button_2 = Instance.new("ImageButton")	
