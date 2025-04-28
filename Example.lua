@@ -1,4 +1,4 @@
-local Library = loadstring(game:HttpGet("
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/WahidzSzz/WahidzSzz/refs/heads/main/SympleLibrary.lua"))()
 
 Library:AddWindow({
 	Title = "library",
@@ -25,3 +25,5 @@ Library:AddButton({
 		print("buttoncalled")
 	end,
 })
+
+--- no tab because its so simple fr
