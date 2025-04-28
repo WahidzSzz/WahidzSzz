@@ -44,9 +44,9 @@ local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 
 
 function Library:AddWindow(tbl)
-	local Title = tbl.Title
+	local Text = tbl.Text
 	local Description = tbl.Description
-	local Icon = tbl.Icon
+	local Image = tbl.Image
 	
 	NathubLibrary.Name = "NathubLibrary"
 	NathubLibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -130,7 +130,7 @@ function Library:AddWindow(tbl)
 	Hub.Position = UDim2.new(0, 0, 0.0967741907, 0)
 	Hub.Size = UDim2.new(0, 400, 0, 31)
 	Hub.Font = Enum.Font.FredokaOne
-	Hub.Text = Title
+	Hub.Text = Text
 	Hub.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Hub.TextSize = 18.000
 
@@ -214,7 +214,7 @@ function Library:AddWindow(tbl)
 	Icon.BorderSizePixel = 0
 	Icon.Position = UDim2.new(0, 0, 0.0250000004, 0)
 	Icon.Size = UDim2.new(0, 40, 0, 40)
-	Icon.Image = "rbxassetid://99764942615873"
+	Icon.Image = Image
 
 	Title_3.Name = "Title"
 	Title_3.Parent = OpenButton
@@ -576,7 +576,7 @@ function Library:AddSection(tbl)
 end
 
 function Library:AddToggle(tbl)
-	local Title = tbl.Title
+	local Text = tbl.Text
 	local Callback = tbl.Callback
 	local Toggle = Instance.new("Frame")
 	local Title = Instance.new("TextLabel")
@@ -603,7 +603,7 @@ function Library:AddToggle(tbl)
 	Title.Position = UDim2.new(0.159999996, 0, 0, 0)
 	Title.Size = UDim2.new(0, 186, 0, 30)
 	Title.Font = Enum.Font.SourceSansBold
-	Title.Text = Title
+	Title.Text = Text
 	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Title.TextSize = 14.000
 	Title.TextXAlignment = Enum.TextXAlignment.Left
@@ -664,7 +664,7 @@ end
 end
 
 function Library:AddButton(tbl)
-	local Title = tbl.Title
+	local Text = tbl.Text
 	local Callback = tbl.Callback
 	local Button = Instance.new("Frame")
 	local Title_2 = Instance.new("TextLabel")
@@ -688,7 +688,7 @@ function Library:AddButton(tbl)
 	Title_2.Position = UDim2.new(0.159999996, 0, 0, 0)
 	Title_2.Size = UDim2.new(0, 186, 0, 30)
 	Title_2.Font = Enum.Font.SourceSansBold
-	Title_2.Text = Title
+	Title_2.Text = Text
 	Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Title_2.TextSize = 14.000
 	Title_2.TextXAlignment = Enum.TextXAlignment.Left
