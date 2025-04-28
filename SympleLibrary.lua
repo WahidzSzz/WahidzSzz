@@ -108,16 +108,75 @@ Library["a"]["BackgroundTransparency"] = 1;
 Library["a"]["Name"] = [[Minimize]];
 Library["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 Library["a"]["Position"] = UDim2.new(0.935, 0, 0.09677, 0);
+Library["a"].MouseButton1Click:Connect(function()
+		local script = Library["b"];
+		local holder = Library["2"]
+		local openbutton = Library["1f"]
+		local TweenService = game:GetService("TweenService")
+		local UIS = game:GetService("UserInputService")
+		local dropTween = TweenService:Create(openbutton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.new(0, 140,0, 40
+			)
+		})
 
+		local grownTween = TweenService:Create(holder, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.new(0
+			)
+		})
 
--- StarterGui.NathubLibrary.Holder.Topbar.Minimize.LocalScript
-Library["b"] = Instance.new("LocalScript", Library["a"]);
-
+		grownTween:Play()
+		dropTween:Play()
+		holder.Visible = false
+		openbutton.Visible = true
+	end)
 
 
 -- StarterGui.NathubLibrary.Holder.Topbar.LocalScript
 Library["c"] = Instance.new("LocalScript", Library["8"]);
+	local function C_c()
+		local script = Library["c"];
+		local UserInputService = game:GetService("UserInputService")
 
+		local gui = script.Parent.Parent.Parent.Holder
+		local topbar = script.Parent
+
+		local dragging
+		local dragInput
+		local dragStart
+		local startPos
+
+		local function update(input)
+			local delta = input.Position - dragStart
+			gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		end
+
+		topbar.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+				dragging = true
+				dragStart = input.Position
+				startPos = gui.Position
+
+				input.Changed:Connect(function()
+					if input.UserInputState == Enum.UserInputState.End then
+						dragging = false
+					end
+				end)
+			end
+		end)
+
+		topbar.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				dragInput = input
+			end
+		end)
+
+		UserInputService.InputChanged:Connect(function(input)
+			if input == dragInput and dragging then
+				update(input)
+			end
+		end)
+	end;
+	task.spawn(C_c);
 
 
 -- StarterGui.NathubLibrary.Holder.Topbar.Hub
@@ -295,15 +354,76 @@ Library["11"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
 	Library["28"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 	Library["28"]["Text"] = [[]];
 	Library["28"]["Position"] = UDim2.new(0.80714, 0, 0, 0);
+	Library["28"].MouseButton1Click:Connect(function()
+			local script = Library["29"];
+			local holder = Library["2"]
+			local openbutton = Library["1f"]
+			local TweenService = game:GetService("TweenService")
+			local UIS = game:GetService("UserInputService")
+			local dropTween = TweenService:Create(openbutton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				Size = UDim2.new(0, 0, 0, 0
+				)
+			})
 
+			local grownTween = TweenService:Create(holder, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				Size = UDim2.new(0, 400,0, 270
+				)
+			})
 
-	-- StarterGui.NathubLibrary.OpenButton.Trigger.LocalScript
-	Library["29"] = Instance.new("LocalScript", Library["28"]);
-
+			grownTween:Play()
+			dropTween:Play()
+			holder.Visible = true
+			openbutton.Visible = false
+		end)
+	
 
 
 	-- StarterGui.NathubLibrary.OpenButton.LocalScript
 	Library["2a"] = Instance.new("LocalScript", Library["1f"]);
+	local function C_2a()
+		local script = Library["2a"];
+		local UserInputService = game:GetService("UserInputService")
+
+		local gui = script.Parent
+
+
+		local dragging
+		local dragInput
+		local dragStart
+		local startPos
+
+		local function update(input)
+			local delta = input.Position - dragStart
+			gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		end
+
+		gui.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+				dragging = true
+				dragStart = input.Position
+				startPos = gui.Position
+
+				input.Changed:Connect(function()
+					if input.UserInputState == Enum.UserInputState.End then
+						dragging = false
+					end
+				end)
+			end
+		end)
+
+		gui.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				dragInput = input
+			end
+		end)
+
+		UserInputService.InputChanged:Connect(function(input)
+			if input == dragInput and dragging then
+				update(input)
+			end
+		end)
+	end;
+	task.spawn(C_2a);
 
 
 
@@ -426,7 +546,19 @@ Library["11"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
 
 	-- StarterGui.NathubLibrary.Dialog.No.LocalScript
 	Library["34"] = Instance.new("LocalScript", Library["33"]);
+	local function C_34()
+		local script = Library["34"];
+		local ms = script.Parent
+		local holder = script.Parent.Parent.Parent.Holder
+		local frme = script.Parent.Parent.Parent.Dialog
 
+		ms.MouseButton1Click:Connect(function()
+
+			holder.Visible = true
+			frme.Visible = false
+		end)
+	end;
+	task.spawn(C_34);
 
 
 	-- StarterGui.NathubLibrary.Dialog.Yes
@@ -758,179 +890,4 @@ Library["1d"].MouseButton1Click:Connect(function()
 end)
 
 end
-
-
-
-
--- StarterGui.NathubLibrary.Holder.Topbar.Minimize.LocalScript
-local function C_b()
-local script = Library["b"];
-	local holder = script.Parent.Parent.Parent.Parent.Holder
-	local ms = script.Parent
-	local openbutton = script.Parent.Parent.Parent.Parent.OpenButton
-	local TweenService = game:GetService("TweenService")
-	local UIS = game:GetService("UserInputService")
-	
-	ms.MouseButton1Click:Connect(function()
-		local dropTween = TweenService:Create(openbutton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			Size = UDim2.new(0, 140,0, 40
-			)
-		})
-	
-		local grownTween = TweenService:Create(holder, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			Size = UDim2.new(0
-			)
-		})
-	
-		grownTween:Play()
-		dropTween:Play()
-		holder.Visible = false
-		openbutton.Visible = true
-	end)
-end;
-task.spawn(C_b);
--- StarterGui.NathubLibrary.Holder.Topbar.LocalScript
-local function C_c()
-local script = Library["c"];
-	local UserInputService = game:GetService("UserInputService")
-	
-	local gui = script.Parent.Parent.Parent.Holder
-	local topbar = script.Parent
-	
-	local dragging
-	local dragInput
-	local dragStart
-	local startPos
-	
-	local function update(input)
-		local delta = input.Position - dragStart
-		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-	end
-	
-	topbar.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-			dragging = true
-			dragStart = input.Position
-			startPos = gui.Position
-	
-			input.Changed:Connect(function()
-				if input.UserInputState == Enum.UserInputState.End then
-					dragging = false
-				end
-			end)
-		end
-	end)
-	
-	topbar.InputChanged:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-			dragInput = input
-		end
-	end)
-	
-	UserInputService.InputChanged:Connect(function(input)
-		if input == dragInput and dragging then
-			update(input)
-		end
-	end)
-end;
-task.spawn(C_c);
--- StarterGui.NathubLibrary.OpenButton.Trigger.LocalScript
-local function C_29()
-local script = Library["29"];
-	local holder = script.Parent.Parent.Parent.Holder
-	local ms = script.Parent
-	local openbutton = script.Parent.Parent
-	local TweenService = game:GetService("TweenService")
-	local UIS = game:GetService("UserInputService")
-	
-	ms.MouseButton1Click:Connect(function()
-		local dropTween = TweenService:Create(openbutton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			Size = UDim2.new(0, 0, 0, 0
-			)
-		})
-		
-		local grownTween = TweenService:Create(holder, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			Size = UDim2.new(0, 400,0, 270
-			)
-		})
-		
-		grownTween:Play()
-			dropTween:Play()
-			holder.Visible = true
-			openbutton.Visible = false
-		end)
-end;
-task.spawn(C_29);
--- StarterGui.NathubLibrary.OpenButton.LocalScript
-local function C_2a()
-local script = Library["2a"];
-	local UserInputService = game:GetService("UserInputService")
-	
-	local gui = script.Parent
-	
-	
-	local dragging
-	local dragInput
-	local dragStart
-	local startPos
-	
-	local function update(input)
-		local delta = input.Position - dragStart
-		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-	end
-	
-	gui.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-			dragging = true
-			dragStart = input.Position
-			startPos = gui.Position
-	
-			input.Changed:Connect(function()
-				if input.UserInputState == Enum.UserInputState.End then
-					dragging = false
-				end
-			end)
-		end
-	end)
-	
-	gui.InputChanged:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-			dragInput = input
-		end
-	end)
-	
-	UserInputService.InputChanged:Connect(function(input)
-		if input == dragInput and dragging then
-			update(input)
-		end
-	end)
-end;
-task.spawn(C_2a);
--- StarterGui.NathubLibrary.Dialog.No.LocalScript
-local function C_34()
-local script = Library["34"];
-	local ms = script.Parent
-	local holder = script.Parent.Parent.Parent.Holder
-	local frme = script.Parent.Parent.Parent.Dialog
-	
-	ms.MouseButton1Click:Connect(function()
-		
-		holder.Visible = true
-		frme.Visible = false
-	end)
-end;
-task.spawn(C_34);
--- StarterGui.NathubLibrary.Dialog.Yes.LocalScript
-local function C_36()
-local script = Library["36"];
-	local ms = script.Parent
-	local natui = script.Parent.Parent.Parent.Parent.NathubUI
-	
-	ms.MouseButton1Click:Connect(function()
-		
-		natui:Destroy()
-	end)
-end;
-task.spawn(C_36);
-
 return Library["1"], require;
