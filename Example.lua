@@ -1,33 +1,52 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/WahidzSzz/WahidzSzz/refs/heads/main/SympleLibrary.lua"))()
+local SympleUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/WahidzSzz/WahidzSzz/refs/heads/main/SympleSympleUI.lua"))()
 
-Library:AddWindow({
+SympleUI:EditOpenButton({
+	Title = "open",
+	Icon = "only support rbxasset"
+})
+
+SympleUI:Notification({
+	Title = "notification",
+	Description = "desc",
+	Duration = "5"
+
+SympleUI:CreateWindow({
 	Title = "Title Library",
-	Description = "openbutton name",
 	Icon = "icon open button"
 })
 
 
-Library:AddSection({
+SympleUI:AddSection({
 	Title = "Section",
 	TextColor = Color3.fromRGB(84, 175, 255)
 })
 
-Library:AddButton({
+local p1 = SympleUI:AddParagraph({
+	Title = "paragraph",
+	Description = "description"
+})
+p1:SetDesc({Title = "newdesc})
+
+SympleUI:AddButton({
 	Title = "Only A Button",
 	Callback = function()
-		Library:Notification({
-			Title = "Notification",
-			Desc = "Description",
-			Duration = "10"
-		})
+		SympleUI:LibraryDestroy()
 	end
 })
 
-Library:AddToggle({
+SympleUI:AddToggle({
 	Title = "Toggle",
 	Callback = function()
 		print("toggle")
 	end
 })
 
+SympleUI:AddCheckBox({
+	Title = "Checkbox",
+	Callback = function()
+		print("checkbox")
+	end
+})
+
+		
 --- no tab because its so simple fr
