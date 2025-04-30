@@ -1047,12 +1047,6 @@ function LIB:CreateWindow(tbl)
 	local Func = Holder.One.Container
 	local Topbar = Holder.Topbar
 	
-	if game:GetService("RunService"):IsStudio() then
-		newGui.Parent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
-	else
-		newGui.Parent = game:GetService("CoreGui")
-	end
-	
 	newGui.Name = Title
 	newGui.Enabled = true
 	
