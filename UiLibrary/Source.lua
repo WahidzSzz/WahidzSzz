@@ -1006,7 +1006,7 @@ local LIB = {};
 local GUI = script.Parent
 local sulf = {}
 GUI.Enabled = true 
-GUI.Parent = nil
+GUI.Parent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
 
 function LIB:Notify(tbl)
 	local Title = tbl.Title
