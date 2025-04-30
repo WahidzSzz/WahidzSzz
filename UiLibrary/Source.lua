@@ -1005,7 +1005,7 @@ end
 local LIB = {};
 local GUI = script.Parent
 local sulf = {}
-GUI.Enabled = false
+GUI.Enabled = true 
 GUI.Parent = nil
 
 function LIB:Notify(tbl)
