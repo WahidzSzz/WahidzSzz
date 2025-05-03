@@ -3,7 +3,6 @@
 
 -- Instances:
 local LIB = {}
-local FUNC = {}
 local TweenService = game:GetService("TweenService")
 local UIS = game:GetService("UserInputService")
 local UserInputService = game:GetService("UserInputService")
@@ -1103,7 +1102,7 @@ function LIB:CreateWindow(tbl)
 			end
 		end)
 	end
-function FUNC:AddSection(tbl)
+function LIB:AddSection(tbl)
 	local Title = tbl.Title
 	local Section = Instance.new("TextLabel")
 	
@@ -1122,7 +1121,7 @@ end
 
 
 
-function FUNC:AddParagraph(tbl)
+function LIB:AddParagraph(tbl)
 	local Title = tbl.Title
 	local Description = tbl.Description
 	
@@ -1172,7 +1171,7 @@ function FUNC:AddParagraph(tbl)
 	UIPadding.PaddingBottom = UDim.new(0, 12)
 end
 	
-	function FUNC:AddButton(tbl)
+	function LIB:AddButton(tbl)
 		local Title = tbl.Title
 		local Callback = tbl.Callback
 		local G2L = {}
@@ -1218,7 +1217,7 @@ end
 		end)
 	end
 	
-function FUNC:AddToggle(tbl)
+function LIB:AddToggle(tbl)
 	local Title = tbl.Title
 	local Callback = tbl.Callback
 	
@@ -1316,10 +1315,6 @@ function FUNC:AddToggle(tbl)
 	Fill.ScaleType = Enum.ScaleType.Slice
 	Fill.SliceCenter = Rect.new(18, 18, 18, 18)
 end
-
-
-	
-return FUNC
 end
 
 
