@@ -43,467 +43,6 @@ local Container = Instance.new("Frame")
 local UIListLayout = Instance.new("UIListLayout")
 local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 local OpenButton = Instance.new("ImageButton")
-
-function LIB:CreateWindow(tbl)
-	local Title = tbl.Title
-	local Icon = tbl.Icon
-	local Keybind = tbl.Keybind
-	
-	NathubLibrary.Name = "NathubLibrary"
-	NathubLibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-	NathubLibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-	Holder.Name = "Holder"
-	Holder.Parent = NathubLibrary
-	Holder.AnchorPoint = Vector2.new(0.5, 0.5)
-	Holder.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-	Holder.BackgroundTransparency = 0.010
-	Holder.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Holder.BorderSizePixel = 0
-	Holder.Position = UDim2.new(0.5, 0, 0.5, 0)
-	Holder.Size = UDim2.new(0, 400, 0, 270)
-
-	Shadow.Name = "Shadow"
-	Shadow.Parent = Holder
-	Shadow.BackgroundTransparency = 1.000
-	Shadow.Size = UDim2.new(1, 0, 1, 0)
-	Shadow.ZIndex = 0
-
-	umbraShadow.Name = "umbraShadow"
-	umbraShadow.Parent = Shadow
-	umbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
-	umbraShadow.BackgroundTransparency = 1.000
-	umbraShadow.Position = UDim2.new(0.5, 0, 0.5, 8)
-	umbraShadow.Size = UDim2.new(1, 10, 1, 10)
-	umbraShadow.ZIndex = 0
-	umbraShadow.Image = "rbxassetid://1316045217"
-	umbraShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
-	umbraShadow.ImageTransparency = 0.860
-	umbraShadow.ScaleType = Enum.ScaleType.Slice
-	umbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
-
-	penumbraShadow.Name = "penumbraShadow"
-	penumbraShadow.Parent = Shadow
-	penumbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
-	penumbraShadow.BackgroundTransparency = 1.000
-	penumbraShadow.Position = UDim2.new(0.5, 0, 0.5, 8)
-	penumbraShadow.Size = UDim2.new(1, 10, 1, 10)
-	penumbraShadow.ZIndex = 0
-	penumbraShadow.Image = "rbxassetid://1316045217"
-	penumbraShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
-	penumbraShadow.ImageTransparency = 0.880
-	penumbraShadow.ScaleType = Enum.ScaleType.Slice
-	penumbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
-
-	ambientShadow.Name = "ambientShadow"
-	ambientShadow.Parent = Shadow
-	ambientShadow.AnchorPoint = Vector2.new(0.5, 0.5)
-	ambientShadow.BackgroundTransparency = 1.000
-	ambientShadow.Position = UDim2.new(0.5, 0, 0.5, 8)
-	ambientShadow.Size = UDim2.new(1, 10, 1, 10)
-	ambientShadow.ZIndex = 0
-	ambientShadow.Image = "rbxassetid://1316045217"
-	ambientShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
-	ambientShadow.ImageTransparency = 0.880
-	ambientShadow.ScaleType = Enum.ScaleType.Slice
-	ambientShadow.SliceCenter = Rect.new(10, 10, 118, 118)
-
-	UICorner.CornerRadius = UDim.new(0, 6)
-	UICorner.Parent = Shadow
-
-	Topbar.Name = "Topbar"
-	Topbar.Parent = Holder
-	Topbar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Topbar.BackgroundTransparency = 1.000
-	Topbar.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Topbar.BorderSizePixel = 0
-	Topbar.Size = UDim2.new(0, 400, 0, 31)
-
-	UICorner_2.CornerRadius = UDim.new(0, 6)
-	UICorner_2.Parent = Topbar
-
-	Minimize.Name = "Minimize"
-	Minimize.Parent = Topbar
-	Minimize.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Minimize.BackgroundTransparency = 1.000
-	Minimize.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Minimize.BorderSizePixel = 0
-	Minimize.Position = UDim2.new(0.935000002, 0, 0.0967741907, 0)
-	Minimize.Size = UDim2.new(0, 20, 0, 20)
-	Minimize.Image = "rbxassetid://10734895530"
-	Minimize.MouseButton1Click:Connect(function()
-		Holder.Visible = false
-	end)
-	
-	Hub.Name = "Hub"
-	Hub.Parent = Topbar
-	Hub.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Hub.BackgroundTransparency = 1.000
-	Hub.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Hub.BorderSizePixel = 0
-	Hub.Position = UDim2.new(0, 0, 0.0967741907, 0)
-	Hub.Size = UDim2.new(0, 400, 0, 31)
-	Hub.Font = Enum.Font.FredokaOne
-	Hub.Text = Title
-	Hub.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Hub.TextSize = 18.000
-
-	IconHub.Name = "IconHub"
-	IconHub.Parent = Topbar
-	IconHub.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	IconHub.BackgroundTransparency = 1.000
-	IconHub.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	IconHub.BorderSizePixel = 0
-	IconHub.Position = UDim2.new(0.0225000009, 0, 0, 0)
-	IconHub.Size = UDim2.new(0, 30, 0, 30)
-	IconHub.Image = Icon
-
-	UICorner_3.CornerRadius = UDim.new(0, 6)
-	UICorner_3.Parent = Holder
-	
-	One.Name = "One"
-	One.Parent = Holder
-	One.Active = true
-	One.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	One.BackgroundTransparency = 1.000
-	One.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	One.BorderSizePixel = 0
-	One.Position = UDim2.new(0, 0, 0.13333334, 0)
-	One.Size = UDim2.new(0, 400, 0, 233)
-	One.CanvasSize = UDim2.new(0, 0, 20, 0)
-	One.ScrollBarThickness = 0
-
-	Container.Name = "Container"
-	Container.Parent = One
-	Container.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Container.BackgroundTransparency = 1.000
-	Container.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Container.BorderSizePixel = 0
-	Container.Size = UDim2.new(0, 400, 0, 233)
-
-	UIListLayout.Parent = Container
-	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-	UIAspectRatioConstraint.Parent = Holder
-	UIAspectRatioConstraint.AspectRatio = 1.481
-		local UserInputService = game:GetService("UserInputService")
-
-		local gui = Holder
-		local topbar = Topbar
-
-		local dragging
-		local dragInput
-		local dragStart
-		local startPos
-
-		local function update(input)
-			local delta = input.Position - dragStart
-			gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-		end
-
-		topbar.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				dragging = true
-				dragStart = input.Position
-				startPos = gui.Position
-
-				input.Changed:Connect(function()
-					if input.UserInputState == Enum.UserInputState.End then
-						dragging = false
-					end
-				end)
-			end
-		end)
-
-		topbar.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-				dragInput = input
-			end
-		end)
-
-		UserInputService.InputChanged:Connect(function(input)
-			if input == dragInput and dragging then
-				update(input)
-			end
-		end)
-	function LIB:EditOpenButton(tbl)
-		local Icon = tbl.Icon
-		OpenButton.Name = "OpenButton"
-		OpenButton.Parent = NathubLibrary
-		OpenButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-		OpenButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		OpenButton.BorderSizePixel = 0
-		OpenButton.Position = UDim2.new(0.132459968, 0, 0.430830032, 0)
-		OpenButton.Size = UDim2.new(0, 40, 0, 40)
-		OpenButton.Image = Icon
-		OpenButton.MouseButton1Click:Connect(function()
-			if Holder.Visible == true or false then
-				Holder.Visible = false
-			else
-				Holder.Visible = true
-			end
-		end)
-		UICorner.CornerRadius = UDim.new(0, 5)
-		UICorner.Parent = OpenButton
-		
-		local UserInputService = game:GetService("UserInputService")
-
-		local dragging
-		local dragInput
-		local dragStart
-		local startPos
-
-		local function update(input)
-			local delta = input.Position - dragStart
-			OpenButton.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-		end
-
-		OpenButton.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				dragging = true
-				dragStart = input.Position
-				startPos = OpenButton.Position
-
-				input.Changed:Connect(function()
-					if input.UserInputState == Enum.UserInputState.End then
-						dragging = false
-					end
-				end)
-			end
-		end)
-
-		OpenButton.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-				dragInput = input
-			end
-		end)
-
-		UserInputService.InputChanged:Connect(function(input)
-			if input == dragInput and dragging then
-				update(input)
-			end
-		end)
-	end
-function FUNC:AddSection(tbl)
-	local Title = tbl.Title
-	local Section = Instance.new("TextLabel")
-	
-	Section.Name = Title
-	Section.Parent = Container
-	Section.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Section.BackgroundTransparency = 1.000
-	Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Section.BorderSizePixel = 0
-	Section.Size = UDim2.new(0, 400, 0, 30)
-	Section.Font = Enum.Font.SourceSansBold
-	Section.Text = Title
-	Section.TextColor3 = Color3.fromRGB(3, 234, 255)
-	Section.TextSize = 18
-end
-
-
-
-function FUNC:AddParagraph(tbl)
-	local Title = tbl.Title
-	local Description = tbl.Description
-	
-	local Paragraph = Instance.new("Frame")
-	local Title_2 = Instance.new("TextLabel")
-	local Desc = Instance.new("TextLabel")
-	local UIPadding = Instance.new("UIPadding")
-	Paragraph.Name = Title
-	Paragraph.Parent = Container
-	Paragraph.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Paragraph.BackgroundTransparency = 1.000
-	Paragraph.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Paragraph.BorderSizePixel = 0
-	Paragraph.Position = UDim2.new(0, 0, 0.386266083, 0)
-	Paragraph.Size = UDim2.new(0, 400, 0, 45)
-
-	Title_2.Name = "Title"
-	Title_2.Parent = Paragraph
-	Title_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Title_2.BackgroundTransparency = 1.000
-	Title_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Title_2.BorderSizePixel = 0
-	Title_2.Position = UDim2.new(0.159999996, 0, 0, 0)
-	Title_2.Size = UDim2.new(0, 186, 0, 30)
-	Title_2.Font = Enum.Font.SourceSansBold
-	Title_2.Text = Title
-	Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Title_2.TextSize = 14.000
-	Title_2.TextXAlignment = Enum.TextXAlignment.Left
-
-	Desc.Name = "Desc"
-	Desc.Parent = Paragraph
-	Desc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Desc.BackgroundTransparency = 1.000
-	Desc.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Desc.BorderSizePixel = 0
-	Desc.Position = UDim2.new(0.159999996, 0, 0.550000012, 0)
-	Desc.Size = UDim2.new(0, 278, 0, 20)
-	Desc.Font = Enum.Font.SourceSansBold
-	Desc.Text = Description
-	Desc.TextColor3 = Color3.fromRGB(85, 85, 85)
-	Desc.TextSize = 12.000
-	Desc.TextWrapped = true
-	Desc.TextXAlignment = Enum.TextXAlignment.Left
-
-	UIPadding.Parent = Desc
-	UIPadding.PaddingBottom = UDim.new(0, 12)
-end
-	
-	function FUNC:AddButton(tbl)
-		local Title = tbl.Title
-		local Callback = tbl.Callback
-		local G2L = {}
-		-- StarterGui.NathubLibrary.Holder.One.Container.Button
-		G2L["14"] = Instance.new("Frame", Container);
-		G2L["14"]["BorderSizePixel"] = 0;
-		G2L["14"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-		G2L["14"]["Size"] = UDim2.new(0, 400, 0, 30);
-		G2L["14"]["Position"] = UDim2.new(0, 0, 0.51502, 0);
-		G2L["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		G2L["14"]["Name"] = Title;
-		G2L["14"]["BackgroundTransparency"] = 1;
-
-
-		-- StarterGui.NathubLibrary.Holder.One.Container.Button.Title
-		G2L["15"] = Instance.new("TextLabel", G2L["14"]);
-		G2L["15"]["BorderSizePixel"] = 0;
-		G2L["15"]["TextSize"] = 14;
-		G2L["15"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-		G2L["15"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-		G2L["15"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-		G2L["15"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-		G2L["15"]["BackgroundTransparency"] = 1;
-		G2L["15"]["Size"] = UDim2.new(0, 186, 0, 30);
-		G2L["15"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		G2L["15"]["Text"] = [[Button]];
-		G2L["15"]["Name"] = Title;
-		G2L["15"]["Position"] = UDim2.new(0.16, 0, 0, 0);
-
-
-		-- StarterGui.NathubLibrary.Holder.One.Container.Button.Trigger
-		G2L["16"] = Instance.new("ImageButton", G2L["14"]);
-		G2L["16"]["BorderSizePixel"] = 0;
-		G2L["16"]["BackgroundColor3"] = Color3.fromRGB(31, 31, 31);
-		G2L["16"]["Image"] = [[rbxassetid://10734898592]];
-		G2L["16"]["Size"] = UDim2.new(0, 20, 0, 20);
-		G2L["16"]["BackgroundTransparency"] = 1;
-		G2L["16"]["Name"] = [[Trigger]];
-		G2L["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		G2L["16"]["Position"] = UDim2.new(0.805, 0, 0.13367, 0);
-		G2L["16"].MouseButton1Click:Connect(function()
-			pcall(Callback)
-		end)
-	end
-	
-function FUNC:AddToggle(tbl)
-	local Title = tbl.Title
-	local Callback = tbl.Callback
-	
-	local Toggle = Instance.new("Frame")
-	local Title_3 = Instance.new("TextLabel")
-	local Element = Instance.new("ImageButton")
-	local Knob = Instance.new("ImageLabel")
-	local Fill = Instance.new("ImageLabel")
-	
-	Toggle.Name = Title
-	Toggle.Parent = Container
-	Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Toggle.BackgroundTransparency = 1.000
-	Toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Toggle.BorderSizePixel = 0
-	Toggle.Size = UDim2.new(0, 400, 0, 30)
-
-	Title_3.Name = "Title"
-	Title_3.Parent = Toggle
-	Title_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Title_3.BackgroundTransparency = 1.000
-	Title_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Title_3.BorderSizePixel = 0
-	Title_3.Position = UDim2.new(0.159999996, 0, 0, 0)
-	Title_3.Size = UDim2.new(0, 186, 0, 30)
-	Title_3.Font = Enum.Font.SourceSansBold
-	Title_3.Text = Title
-	Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Title_3.TextSize = 14.000
-	Title_3.TextXAlignment = Enum.TextXAlignment.Left
-
-	Element.Name = "Element"
-	Element.Parent = Toggle
-	Element.AnchorPoint = Vector2.new(0.5, 0.5)
-	Element.BackgroundTransparency = 1.000
-	Element.BorderColor3 = Color3.fromRGB(27, 42, 53)
-	Element.Position = UDim2.new(0.805000007, 0, 0.5, 0)
-	Element.Size = UDim2.new(0, 30, 0, 14)
-	Element.Image = "rbxasset://textures/ui/ImageSet/InGameMenu/img_set_1x_1.png"
-	Element.ImageRectOffset = Vector2.new(287, 0)
-	Element.ImageRectSize = Vector2.new(36, 36)
-	Element.ImageTransparency = 0.300
-	Element.ScaleType = Enum.ScaleType.Slice
-	Element.SliceCenter = Rect.new(18, 18, 18, 18)
-	local ts,ti = game.TweenService,TweenInfo.new(.5,Enum.EasingStyle.Quint)
-
-	local on1,on2,off1,off2 = ts:Create(Fill,ti,{ImageTransparency=0}), ts:Create(Knob,ti,{Position=UDim2.new(1.779, -39,0.5, 0)}),ts:Create(Fill,ti,{ImageTransparency=1}), ts:Create(Knob,ti,{Position=UDim2.new(1.113, -39,0.5, 0)})
-
-	local state = script.Parent:GetAttribute("state")
-
-	if state then
-		on1:Play()
-		on2:Play()
-	else
-		off1:Play()
-		off2:Play()
-	end
-	Element.MouseButton1Click:Connect(function()
-		state = script.Parent:GetAttribute("state")
-
-		if state then
-			script.Parent:SetAttribute("state",false)
-			off1:Play()
-				off2:Play()
-				pcall(Callback)
-		else
-			script.Parent:SetAttribute("state",true)
-			on1:Play()
-				on2:Play()
-				pcall(Callback)
-		end
-	end)
-	
-	Knob.Name = "Knob"
-	Knob.Parent = Element
-	Knob.AnchorPoint = Vector2.new(0, 0.5)
-	Knob.BackgroundTransparency = 1.000
-	Knob.BorderColor3 = Color3.fromRGB(27, 42, 53)
-	Knob.Position = UDim2.new(1.77948713, -39, 0.5, 0)
-	Knob.Size = UDim2.new(0, 20, 0, 20)
-	Knob.ZIndex = 2
-	Knob.Image = "rbxasset://textures/ui/ImageSet/InGameMenu/img_set_1x_1.png"
-	Knob.ImageRectOffset = Vector2.new(0, 208)
-	Knob.ImageRectSize = Vector2.new(42, 42)
-
-	Fill.Name = "Fill"
-	Fill.Parent = Element
-	Fill.BackgroundTransparency = 1.000
-	Fill.BorderColor3 = Color3.fromRGB(27, 42, 53)
-	Fill.Size = UDim2.new(1, 0, 1, 0)
-	Fill.Image = "rbxasset://textures/ui/ImageSet/InGameMenu/img_set_1x_1.png"
-	Fill.ImageColor3 = Color3.fromRGB(0, 213, 217)
-	Fill.ImageRectOffset = Vector2.new(324, 0)
-	Fill.ImageRectSize = Vector2.new(36, 36)
-	Fill.ScaleType = Enum.ScaleType.Slice
-	Fill.SliceCenter = Rect.new(18, 18, 18, 18)
-end
-
-
-	
-return FUNC
-end
-
-
-return LIB
 local assets = {
 	["accessibility"] = "rbxassetid://10709751939",
 	["activity"] = "rbxassetid://10709752035",
@@ -1324,3 +863,464 @@ local assets = {
 	["zoom-in"] = "rbxassetid://10747384552",
 	["zoom-out"] = "rbxassetid://10747384679",
 }
+
+function LIB:CreateWindow(tbl)
+	local Title = tbl.Title
+	local Icon = tbl.Icon
+	local Keybind = tbl.Keybind
+	
+	NathubLibrary.Name = "NathubLibrary"
+	NathubLibrary.Parent = game.CoreGui
+	NathubLibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	Holder.Name = "Holder"
+	Holder.Parent = NathubLibrary
+	Holder.AnchorPoint = Vector2.new(0.5, 0.5)
+	Holder.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	Holder.BackgroundTransparency = 0.010
+	Holder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Holder.BorderSizePixel = 0
+	Holder.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Holder.Size = UDim2.new(0, 400, 0, 270)
+
+	Shadow.Name = "Shadow"
+	Shadow.Parent = Holder
+	Shadow.BackgroundTransparency = 1.000
+	Shadow.Size = UDim2.new(1, 0, 1, 0)
+	Shadow.ZIndex = 0
+
+	umbraShadow.Name = "umbraShadow"
+	umbraShadow.Parent = Shadow
+	umbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+	umbraShadow.BackgroundTransparency = 1.000
+	umbraShadow.Position = UDim2.new(0.5, 0, 0.5, 8)
+	umbraShadow.Size = UDim2.new(1, 10, 1, 10)
+	umbraShadow.ZIndex = 0
+	umbraShadow.Image = "rbxassetid://1316045217"
+	umbraShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	umbraShadow.ImageTransparency = 0.860
+	umbraShadow.ScaleType = Enum.ScaleType.Slice
+	umbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
+
+	penumbraShadow.Name = "penumbraShadow"
+	penumbraShadow.Parent = Shadow
+	penumbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+	penumbraShadow.BackgroundTransparency = 1.000
+	penumbraShadow.Position = UDim2.new(0.5, 0, 0.5, 8)
+	penumbraShadow.Size = UDim2.new(1, 10, 1, 10)
+	penumbraShadow.ZIndex = 0
+	penumbraShadow.Image = "rbxassetid://1316045217"
+	penumbraShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	penumbraShadow.ImageTransparency = 0.880
+	penumbraShadow.ScaleType = Enum.ScaleType.Slice
+	penumbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
+
+	ambientShadow.Name = "ambientShadow"
+	ambientShadow.Parent = Shadow
+	ambientShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+	ambientShadow.BackgroundTransparency = 1.000
+	ambientShadow.Position = UDim2.new(0.5, 0, 0.5, 8)
+	ambientShadow.Size = UDim2.new(1, 10, 1, 10)
+	ambientShadow.ZIndex = 0
+	ambientShadow.Image = "rbxassetid://1316045217"
+	ambientShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	ambientShadow.ImageTransparency = 0.880
+	ambientShadow.ScaleType = Enum.ScaleType.Slice
+	ambientShadow.SliceCenter = Rect.new(10, 10, 118, 118)
+
+	UICorner.CornerRadius = UDim.new(0, 6)
+	UICorner.Parent = Shadow
+
+	Topbar.Name = "Topbar"
+	Topbar.Parent = Holder
+	Topbar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Topbar.BackgroundTransparency = 1.000
+	Topbar.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Topbar.BorderSizePixel = 0
+	Topbar.Size = UDim2.new(0, 400, 0, 31)
+
+	UICorner_2.CornerRadius = UDim.new(0, 6)
+	UICorner_2.Parent = Topbar
+
+	Minimize.Name = "Minimize"
+	Minimize.Parent = Topbar
+	Minimize.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Minimize.BackgroundTransparency = 1.000
+	Minimize.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Minimize.BorderSizePixel = 0
+	Minimize.Position = UDim2.new(0.935000002, 0, 0.0967741907, 0)
+	Minimize.Size = UDim2.new(0, 20, 0, 20)
+	Minimize.Image = "rbxassetid://10734895530"
+	Minimize.MouseButton1Click:Connect(function()
+		Holder.Visible = false
+	end)
+	
+	Hub.Name = "Hub"
+	Hub.Parent = Topbar
+	Hub.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Hub.BackgroundTransparency = 1.000
+	Hub.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Hub.BorderSizePixel = 0
+	Hub.Position = UDim2.new(0, 0, 0.0967741907, 0)
+	Hub.Size = UDim2.new(0, 400, 0, 31)
+	Hub.Font = Enum.Font.FredokaOne
+	Hub.Text = Title
+	Hub.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Hub.TextSize = 18.000
+
+	IconHub.Name = "IconHub"
+	IconHub.Parent = Topbar
+	IconHub.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	IconHub.BackgroundTransparency = 1.000
+	IconHub.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	IconHub.BorderSizePixel = 0
+	IconHub.Position = UDim2.new(0.0225000009, 0, 0, 0)
+	IconHub.Size = UDim2.new(0, 30, 0, 30)
+	IconHub.Image = Icon
+
+	UICorner_3.CornerRadius = UDim.new(0, 6)
+	UICorner_3.Parent = Holder
+	
+	One.Name = "One"
+	One.Parent = Holder
+	One.Active = true
+	One.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	One.BackgroundTransparency = 1.000
+	One.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	One.BorderSizePixel = 0
+	One.Position = UDim2.new(0, 0, 0.13333334, 0)
+	One.Size = UDim2.new(0, 400, 0, 233)
+	One.CanvasSize = UDim2.new(0, 0, 20, 0)
+	One.ScrollBarThickness = 0
+
+	Container.Name = "Container"
+	Container.Parent = One
+	Container.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Container.BackgroundTransparency = 1.000
+	Container.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Container.BorderSizePixel = 0
+	Container.Size = UDim2.new(0, 400, 0, 233)
+
+	UIListLayout.Parent = Container
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIAspectRatioConstraint.Parent = Holder
+	UIAspectRatioConstraint.AspectRatio = 1.481
+		local UserInputService = game:GetService("UserInputService")
+
+		local gui = Holder
+		local topbar = Topbar
+
+		local dragging
+		local dragInput
+		local dragStart
+		local startPos
+
+		local function update(input)
+			local delta = input.Position - dragStart
+			gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		end
+
+		topbar.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+				dragging = true
+				dragStart = input.Position
+				startPos = gui.Position
+
+				input.Changed:Connect(function()
+					if input.UserInputState == Enum.UserInputState.End then
+						dragging = false
+					end
+				end)
+			end
+		end)
+
+		topbar.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				dragInput = input
+			end
+		end)
+
+		UserInputService.InputChanged:Connect(function(input)
+			if input == dragInput and dragging then
+				update(input)
+			end
+		end)
+	function LIB:EditOpenButton(tbl)
+		local Icon = tbl.Icon
+		OpenButton.Name = "OpenButton"
+		OpenButton.Parent = NathubLibrary
+		OpenButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+		OpenButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		OpenButton.BorderSizePixel = 0
+		OpenButton.Position = UDim2.new(0.132459968, 0, 0.430830032, 0)
+		OpenButton.Size = UDim2.new(0, 40, 0, 40)
+		OpenButton.Image = Icon
+		OpenButton.MouseButton1Click:Connect(function()
+			if Holder.Visible == true or false then
+				Holder.Visible = false
+			else
+				Holder.Visible = true
+			end
+		end)
+		UICorner.CornerRadius = UDim.new(0, 5)
+		UICorner.Parent = OpenButton
+		
+		local UserInputService = game:GetService("UserInputService")
+
+		local dragging
+		local dragInput
+		local dragStart
+		local startPos
+
+		local function update(input)
+			local delta = input.Position - dragStart
+			OpenButton.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		end
+
+		OpenButton.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+				dragging = true
+				dragStart = input.Position
+				startPos = OpenButton.Position
+
+				input.Changed:Connect(function()
+					if input.UserInputState == Enum.UserInputState.End then
+						dragging = false
+					end
+				end)
+			end
+		end)
+
+		OpenButton.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				dragInput = input
+			end
+		end)
+
+		UserInputService.InputChanged:Connect(function(input)
+			if input == dragInput and dragging then
+				update(input)
+			end
+		end)
+	end
+function FUNC:AddSection(tbl)
+	local Title = tbl.Title
+	local Section = Instance.new("TextLabel")
+	
+	Section.Name = Title
+	Section.Parent = Container
+	Section.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Section.BackgroundTransparency = 1.000
+	Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Section.BorderSizePixel = 0
+	Section.Size = UDim2.new(0, 400, 0, 30)
+	Section.Font = Enum.Font.SourceSansBold
+	Section.Text = Title
+	Section.TextColor3 = Color3.fromRGB(3, 234, 255)
+	Section.TextSize = 18
+end
+
+
+
+function FUNC:AddParagraph(tbl)
+	local Title = tbl.Title
+	local Description = tbl.Description
+	
+	local Paragraph = Instance.new("Frame")
+	local Title_2 = Instance.new("TextLabel")
+	local Desc = Instance.new("TextLabel")
+	local UIPadding = Instance.new("UIPadding")
+	Paragraph.Name = Title
+	Paragraph.Parent = Container
+	Paragraph.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Paragraph.BackgroundTransparency = 1.000
+	Paragraph.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Paragraph.BorderSizePixel = 0
+	Paragraph.Position = UDim2.new(0, 0, 0.386266083, 0)
+	Paragraph.Size = UDim2.new(0, 400, 0, 45)
+
+	Title_2.Name = "Title"
+	Title_2.Parent = Paragraph
+	Title_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title_2.BackgroundTransparency = 1.000
+	Title_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Title_2.BorderSizePixel = 0
+	Title_2.Position = UDim2.new(0.159999996, 0, 0, 0)
+	Title_2.Size = UDim2.new(0, 186, 0, 30)
+	Title_2.Font = Enum.Font.SourceSansBold
+	Title_2.Text = Title
+	Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title_2.TextSize = 14.000
+	Title_2.TextXAlignment = Enum.TextXAlignment.Left
+
+	Desc.Name = "Desc"
+	Desc.Parent = Paragraph
+	Desc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Desc.BackgroundTransparency = 1.000
+	Desc.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Desc.BorderSizePixel = 0
+	Desc.Position = UDim2.new(0.159999996, 0, 0.550000012, 0)
+	Desc.Size = UDim2.new(0, 278, 0, 20)
+	Desc.Font = Enum.Font.SourceSansBold
+	Desc.Text = Description
+	Desc.TextColor3 = Color3.fromRGB(85, 85, 85)
+	Desc.TextSize = 12.000
+	Desc.TextWrapped = true
+	Desc.TextXAlignment = Enum.TextXAlignment.Left
+
+	UIPadding.Parent = Desc
+	UIPadding.PaddingBottom = UDim.new(0, 12)
+end
+	
+	function FUNC:AddButton(tbl)
+		local Title = tbl.Title
+		local Callback = tbl.Callback
+		local G2L = {}
+		-- StarterGui.NathubLibrary.Holder.One.Container.Button
+		G2L["14"] = Instance.new("Frame", Container);
+		G2L["14"]["BorderSizePixel"] = 0;
+		G2L["14"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+		G2L["14"]["Size"] = UDim2.new(0, 400, 0, 30);
+		G2L["14"]["Position"] = UDim2.new(0, 0, 0.51502, 0);
+		G2L["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		G2L["14"]["Name"] = Title;
+		G2L["14"]["BackgroundTransparency"] = 1;
+
+
+		-- StarterGui.NathubLibrary.Holder.One.Container.Button.Title
+		G2L["15"] = Instance.new("TextLabel", G2L["14"]);
+		G2L["15"]["BorderSizePixel"] = 0;
+		G2L["15"]["TextSize"] = 14;
+		G2L["15"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+		G2L["15"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+		G2L["15"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+		G2L["15"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+		G2L["15"]["BackgroundTransparency"] = 1;
+		G2L["15"]["Size"] = UDim2.new(0, 186, 0, 30);
+		G2L["15"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		G2L["15"]["Text"] = [[Button]];
+		G2L["15"]["Name"] = Title;
+		G2L["15"]["Position"] = UDim2.new(0.16, 0, 0, 0);
+
+
+		-- StarterGui.NathubLibrary.Holder.One.Container.Button.Trigger
+		G2L["16"] = Instance.new("ImageButton", G2L["14"]);
+		G2L["16"]["BorderSizePixel"] = 0;
+		G2L["16"]["BackgroundColor3"] = Color3.fromRGB(31, 31, 31);
+		G2L["16"]["Image"] = [[rbxassetid://10734898592]];
+		G2L["16"]["Size"] = UDim2.new(0, 20, 0, 20);
+		G2L["16"]["BackgroundTransparency"] = 1;
+		G2L["16"]["Name"] = [[Trigger]];
+		G2L["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		G2L["16"]["Position"] = UDim2.new(0.805, 0, 0.13367, 0);
+		G2L["16"].MouseButton1Click:Connect(function()
+			pcall(Callback)
+		end)
+	end
+	
+function FUNC:AddToggle(tbl)
+	local Title = tbl.Title
+	local Callback = tbl.Callback
+	
+	local Toggle = Instance.new("Frame")
+	local Title_3 = Instance.new("TextLabel")
+	local Element = Instance.new("ImageButton")
+	local Knob = Instance.new("ImageLabel")
+	local Fill = Instance.new("ImageLabel")
+	
+	Toggle.Name = Title
+	Toggle.Parent = Container
+	Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Toggle.BackgroundTransparency = 1.000
+	Toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Toggle.BorderSizePixel = 0
+	Toggle.Size = UDim2.new(0, 400, 0, 30)
+
+	Title_3.Name = "Title"
+	Title_3.Parent = Toggle
+	Title_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title_3.BackgroundTransparency = 1.000
+	Title_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Title_3.BorderSizePixel = 0
+	Title_3.Position = UDim2.new(0.159999996, 0, 0, 0)
+	Title_3.Size = UDim2.new(0, 186, 0, 30)
+	Title_3.Font = Enum.Font.SourceSansBold
+	Title_3.Text = Title
+	Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title_3.TextSize = 14.000
+	Title_3.TextXAlignment = Enum.TextXAlignment.Left
+
+	Element.Name = "Element"
+	Element.Parent = Toggle
+	Element.AnchorPoint = Vector2.new(0.5, 0.5)
+	Element.BackgroundTransparency = 1.000
+	Element.BorderColor3 = Color3.fromRGB(27, 42, 53)
+	Element.Position = UDim2.new(0.805000007, 0, 0.5, 0)
+	Element.Size = UDim2.new(0, 30, 0, 14)
+	Element.Image = "rbxasset://textures/ui/ImageSet/InGameMenu/img_set_1x_1.png"
+	Element.ImageRectOffset = Vector2.new(287, 0)
+	Element.ImageRectSize = Vector2.new(36, 36)
+	Element.ImageTransparency = 0.300
+	Element.ScaleType = Enum.ScaleType.Slice
+	Element.SliceCenter = Rect.new(18, 18, 18, 18)
+	local ts,ti = game.TweenService,TweenInfo.new(.5,Enum.EasingStyle.Quint)
+
+	local on1,on2,off1,off2 = ts:Create(Fill,ti,{ImageTransparency=0}), ts:Create(Knob,ti,{Position=UDim2.new(1.779, -39,0.5, 0)}),ts:Create(Fill,ti,{ImageTransparency=1}), ts:Create(Knob,ti,{Position=UDim2.new(1.113, -39,0.5, 0)})
+
+	local state = script.Parent:GetAttribute("state")
+
+	if state then
+		on1:Play()
+		on2:Play()
+	else
+		off1:Play()
+		off2:Play()
+	end
+	Element.MouseButton1Click:Connect(function()
+		state = script.Parent:GetAttribute("state")
+
+		if state then
+			script.Parent:SetAttribute("state",false)
+			off1:Play()
+				off2:Play()
+				pcall(Callback)
+		else
+			script.Parent:SetAttribute("state",true)
+			on1:Play()
+				on2:Play()
+				pcall(Callback)
+		end
+	end)
+	
+	Knob.Name = "Knob"
+	Knob.Parent = Element
+	Knob.AnchorPoint = Vector2.new(0, 0.5)
+	Knob.BackgroundTransparency = 1.000
+	Knob.BorderColor3 = Color3.fromRGB(27, 42, 53)
+	Knob.Position = UDim2.new(1.77948713, -39, 0.5, 0)
+	Knob.Size = UDim2.new(0, 20, 0, 20)
+	Knob.ZIndex = 2
+	Knob.Image = "rbxasset://textures/ui/ImageSet/InGameMenu/img_set_1x_1.png"
+	Knob.ImageRectOffset = Vector2.new(0, 208)
+	Knob.ImageRectSize = Vector2.new(42, 42)
+
+	Fill.Name = "Fill"
+	Fill.Parent = Element
+	Fill.BackgroundTransparency = 1.000
+	Fill.BorderColor3 = Color3.fromRGB(27, 42, 53)
+	Fill.Size = UDim2.new(1, 0, 1, 0)
+	Fill.Image = "rbxasset://textures/ui/ImageSet/InGameMenu/img_set_1x_1.png"
+	Fill.ImageColor3 = Color3.fromRGB(0, 213, 217)
+	Fill.ImageRectOffset = Vector2.new(324, 0)
+	Fill.ImageRectSize = Vector2.new(36, 36)
+	Fill.ScaleType = Enum.ScaleType.Slice
+	Fill.SliceCenter = Rect.new(18, 18, 18, 18)
+end
+
+
+	
+return FUNC
+end
+
+
+return LIB
