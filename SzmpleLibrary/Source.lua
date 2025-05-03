@@ -179,7 +179,7 @@ UserInputService.InputChanged:Connect(function(input)
 end)
 
 Library.Name = "Library"
-Library.Parent = game.CoreGui
+Library.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Holder.Name = "Holder"
@@ -638,12 +638,29 @@ Fill.ImageTransparency = 0.100
 Fill.ScaleType = Enum.ScaleType.Slice
 Fill.SliceCenter = Rect.new(18, 18, 18, 18)			
 end		
+			
+local Szmple = loadstring(game:HttpGet("https://raw.githubusercontent.com/WahidzSzz/WahidzSzz/refs/heads/main/SzmpleLibrary/Source.lua"))()
+			
+Szmple:EditOpenButton({
+	Icon = "rbxassset or lucide",
+	Size = UDim2.new(0, 40,0, 40),
+	Visible = true
+})
+			
+			Szmple:CreateWindow({
+				Title = "Szmple Library",
+				
+			})			
+			
+			
+			
+			
+			
 return self
 end
 return LIB
 end
 end
-
 local assets = {
 	["accessibility"] = "rbxassetid://10709751939",
 	["activity"] = "rbxassetid://10709752035",
