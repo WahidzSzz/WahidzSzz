@@ -1266,7 +1266,7 @@ function LIB:AddToggle(tbl)
 
 	local on1,on2,off1,off2 = ts:Create(Fill,ti,{ImageTransparency=0}), ts:Create(Knob,ti,{Position=UDim2.new(1.779, -39,0.5, 0)}),ts:Create(Fill,ti,{ImageTransparency=1}), ts:Create(Knob,ti,{Position=UDim2.new(1.113, -39,0.5, 0)})
 
-	local state = script.Parent:GetAttribute("state")
+	local state = Element:GetAttribute("state")
 
 	if state then
 		on1:Play()
@@ -1276,7 +1276,7 @@ function LIB:AddToggle(tbl)
 		off2:Play()
 	end
 	Element.MouseButton1Click:Connect(function()
-		state = script.Parent:GetAttribute("state")
+		state = Element:GetAttribute("state")
 
 		if state then
 			script.Parent:SetAttribute("state",false)
