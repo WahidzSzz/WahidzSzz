@@ -1,40 +1,33 @@
-local Szmple = loadstring(game:HttpGet("https://raw.githubusercontent.com/WahidzSzz/WahidzSzz/refs/heads/main/SzmpleLibrary/Source.lua"))()
-			
-Szmple:EditOpenButton({
-	Icon = "rbxassset or lucide",
-	Size = UDim2.new(0, 40,0, 40),
-	Visible = true
-})
+local Szmple = loadstring(game:HttpGet("https://raw.githubusercontent.com/WahidzSzz/WahidzSzz/refs/heads/main/SzmpleSzmplerary/Source.lua"))()
 			
 Szmple:CreateWindow({
-	Title = "Szmple Library",
-	Icon = "lucide or rbxasset",
-	Keybind = Enum.KeyCode.H
-})			
-			
-local tab1 = Szmple:AddTab({
-	Title = "tab1"
-})			
-			
-tab1:AddSection({
-	Title = "Section"
-})		
-			
-tab1:AddParagraph({
-	Title = "Paragraph",
-	Description = "Description"
+	Title = "WINDOW",
+	Icon = "icon"
 })
-			
-tab1:AddButton({
-	Title = "Button",
-	Callback = function()
-					
+
+Szmple:EditOpenButton({
+	Icon = ""
+})
+
+Szmple:AddSection({
+	Title = "Section"
+})
+
+Szmple:AddParagraph({
+	Title = "paragraphj",
+	Description = "desc"
+})
+
+Szmple:AddButton({
+	Title = "button",
+	Callback = Szmpletion()
+	print("callback")
 	end
-})	
-			
-tab1:AddToggle({
-	Title = "Toggle",
-	Callback = function()
-					
+})
+
+Szmple:AddToggle({
+	Title = "toggle",
+	Callback = Szmpletion()
+		print("callback")
 	end
 })
