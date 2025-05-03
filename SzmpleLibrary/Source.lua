@@ -1264,31 +1264,33 @@ function LIB:AddToggle(tbl)
 	Element.SliceCenter = Rect.new(18, 18, 18, 18)
 	local ts,ti = game.TweenService,TweenInfo.new(.5,Enum.EasingStyle.Quint)
 
-	local on1,on2,off1,off2 = ts:Create(Fill,ti,{ImageTransparency=0}), ts:Create(Knob,ti,{Position=UDim2.new(1.779, -39,0.5, 0)}),ts:Create(Fill,ti,{ImageTransparency=1}), ts:Create(Knob,ti,{Position=UDim2.new(1.113, -39,0.5, 0)})
+		local on1,on2,off1,off2 = ts:Create(Fill,ti,{ImageTransparency=0}), ts:Create(Knob,ti,{Position=UDim2.new(1.779, -39,0.5, 0)}),ts:Create(Fill,ti,{ImageTransparency=1}), ts:Create(Knob,ti,{Position=UDim2.new(1.113, -39,0.5, 0)})
 
-	local state = Element:GetAttribute("state")
-
-	if state then
-		on1:Play()
-		on2:Play()
-	else
-		off1:Play()
-		off2:Play()
-	end
-	Element.MouseButton1Click:Connect(function()
-		state = Element:GetAttribute("state")
+		local state = script.Parent:GetAttribute("state")
 
 		if state then
-			script.Parent:SetAttribute("state",false)
-			off1:Play()
-				off2:Play()
-				pcall(Callback)
-		else
-			script.Parent:SetAttribute("state",true)
 			on1:Play()
-				on2:Play()
-				pcall(Callback)
+			on2:Play()
+		else
+			off1:Play()
+			off2:Play()
 		end
+				
+	Element.MouseButton1Click:Connect(function()
+	
+		state = script.Parent:GetAttribute("state")
+
+					if state then
+						script.Parent:SetAttribute("state",false)
+						off1:Play()
+						off2:Play()
+						pcall(Callback)
+					else
+						script.Parent:SetAttribute("state",true)
+						on1:Play()
+						on2:Play()
+						pcall(Callback)
+					end
 	end)
 	
 	Knob.Name = "Knob"
