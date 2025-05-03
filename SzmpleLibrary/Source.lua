@@ -1,4 +1,9 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
 local LIB = {}
+local FUNC = {}
 local TweenService = game:GetService("TweenService")
 local UIS = game:GetService("UserInputService")
 local UserInputService = game:GetService("UserInputService")
@@ -20,647 +25,485 @@ local function Tween(obj, Prop)
 	return Tween
 end
 
-local Library = Instance.new("ScreenGui")
-local Holder = Instance.new("Folder")
-local UiFrame = Instance.new("Frame")
-local Shadow = Instance.new("Folder")
-local shadowHolder = Instance.new("Frame")
+local NathubLibrary = Instance.new("ScreenGui")
+local Holder = Instance.new("Frame")
+local Shadow = Instance.new("Frame")
 local umbraShadow = Instance.new("ImageLabel")
 local penumbraShadow = Instance.new("ImageLabel")
 local ambientShadow = Instance.new("ImageLabel")
 local UICorner = Instance.new("UICorner")
-local Topbar = Instance.new("Folder")
-local TopbarFrame = Instance.new("Frame")
-local Line = Instance.new("Frame")
-local Title = Instance.new("TextLabel")
-local UIPadding = Instance.new("UIPadding")
-local Logo = Instance.new("ImageLabel")
-local Minimize = Instance.new("ImageButton")
-local Close = Instance.new("ImageButton")
-local TabList = Instance.new("Folder")
-local Scroll = Instance.new("ScrollingFrame")
-local UIListLayout = Instance.new("UIListLayout")
-local One = Instance.new("TextButton")
+local Topbar = Instance.new("Frame")
 local UICorner_2 = Instance.new("UICorner")
-local Two = Instance.new("TextButton")
+local Minimize = Instance.new("ImageButton")
+local Hub = Instance.new("TextLabel")
+local IconHub = Instance.new("ImageLabel")
 local UICorner_3 = Instance.new("UICorner")
-local Line_2 = Instance.new("Frame")
-local Template = Instance.new("Folder")
-local One_2 = Instance.new("ScrollingFrame")
-local FrameScroll = Instance.new("Frame")
-local UIListLayout_2 = Instance.new("UIListLayout")
-local Section = Instance.new("TextLabel")
-local Toggle = Instance.new("Frame")
-local Title_2 = Instance.new("TextLabel")
-local Element = Instance.new("ImageButton")
-local Knob = Instance.new("ImageLabel")
-local Fill = Instance.new("ImageLabel")
-local Button = Instance.new("Frame")
-local Title_3 = Instance.new("TextLabel")
-local Lock = Instance.new("ImageButton")
-local Paragraph = Instance.new("Frame")
-local Title_4 = Instance.new("TextLabel")
-local Content = Instance.new("TextLabel")
-local UIPadding_2 = Instance.new("UIPadding")
-local Two_2 = Instance.new("ScrollingFrame")
-local FrameScroll_2 = Instance.new("Frame")
-local UIListLayout_3 = Instance.new("UIListLayout")
-local Section_2 = Instance.new("TextLabel")
-local Toggle_2 = Instance.new("Frame")
-local Title_5 = Instance.new("TextLabel")
-local Element_2 = Instance.new("ImageButton")
-local Knob_2 = Instance.new("ImageLabel")
-local Fill_2 = Instance.new("ImageLabel")
-local Paragraph_2 = Instance.new("Frame")
-local Title_6 = Instance.new("TextLabel")
-local Content_2 = Instance.new("TextLabel")
-local UIPadding_3 = Instance.new("UIPadding")
-local OpenButton = Instance.new("Folder")
-local Button_2 = Instance.new("ImageButton")
-local UICorner_4 = Instance.new("UICorner")
-
-function LIB:EditOpenButton(tbl)
-local Icon = tbl.Icon
-local Size = tbl.Size
-local Visible = tbl.Visible
-	
-OpenButton.Name = "OpenButton"
-OpenButton.Parent = Library
-
-Button_2.Name = "Button"
-Button_2.Parent = OpenButton
-Button_2.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-Button_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Button_2.BorderSizePixel = 0
-Button_2.Position = UDim2.new(0.163027659, 0, 0.363636374, 0)
-Button_2.Size = Size
-Button_2.Image = Icon
-Button_2.Visible = Visible
-	
-UICorner_4.Parent = Button_2
-	
-local dragging
-local dragInput
-local dragStart
-local startPos
-
-local function update(input)
-	local delta = input.Position - dragStart
-	Button_2.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-end
-
-Button_2.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		dragging = true
-		dragStart = input.Position
-		startPos = Button_2.Position
-
-		input.Changed:Connect(function()
-			if input.UserInputState == Enum.UserInputState.End then
-				dragging = false
-			end
-		end)
-	end
-end)
-
-Button_2.InputChanged:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-		dragInput = input
-	end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-	if input == dragInput and dragging then
-		update(input)
-	end
-end)
-end
+local One = Instance.new("ScrollingFrame")
+local Container = Instance.new("Frame")
+local UIListLayout = Instance.new("UIListLayout")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+local OpenButton = Instance.new("ImageButton")
 
 function LIB:CreateWindow(tbl)
-local self = {}
-local Title = tbl.Title
-local Icon = tbl.Icon
-local Keybind = tbl.Keybind
+	local Title = tbl.Title
+	local Icon = tbl.Icon
+	local Keybind = tbl.Keybind
 	
-local dragging
-local dragInput
-local dragStart
-local startPos
+	NathubLibrary.Name = "NathubLibrary"
+	NathubLibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	NathubLibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-local function update(input)
-	local delta = input.Position - dragStart
-	UiFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-end
+	Holder.Name = "Holder"
+	Holder.Parent = NathubLibrary
+	Holder.AnchorPoint = Vector2.new(0.5, 0.5)
+	Holder.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	Holder.BackgroundTransparency = 0.010
+	Holder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Holder.BorderSizePixel = 0
+	Holder.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Holder.Size = UDim2.new(0, 400, 0, 270)
 
-Topbar.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		dragging = true
-		dragStart = input.Position
-		startPos = UiFrame.Position
+	Shadow.Name = "Shadow"
+	Shadow.Parent = Holder
+	Shadow.BackgroundTransparency = 1.000
+	Shadow.Size = UDim2.new(1, 0, 1, 0)
+	Shadow.ZIndex = 0
 
-		input.Changed:Connect(function()
-			if input.UserInputState == Enum.UserInputState.End then
-				dragging = false
-			end
-		end)
-	end
-end)
+	umbraShadow.Name = "umbraShadow"
+	umbraShadow.Parent = Shadow
+	umbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+	umbraShadow.BackgroundTransparency = 1.000
+	umbraShadow.Position = UDim2.new(0.5, 0, 0.5, 8)
+	umbraShadow.Size = UDim2.new(1, 10, 1, 10)
+	umbraShadow.ZIndex = 0
+	umbraShadow.Image = "rbxassetid://1316045217"
+	umbraShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	umbraShadow.ImageTransparency = 0.860
+	umbraShadow.ScaleType = Enum.ScaleType.Slice
+	umbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
 
-Topbar.InputChanged:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-		dragInput = input
-	end
-end)
+	penumbraShadow.Name = "penumbraShadow"
+	penumbraShadow.Parent = Shadow
+	penumbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+	penumbraShadow.BackgroundTransparency = 1.000
+	penumbraShadow.Position = UDim2.new(0.5, 0, 0.5, 8)
+	penumbraShadow.Size = UDim2.new(1, 10, 1, 10)
+	penumbraShadow.ZIndex = 0
+	penumbraShadow.Image = "rbxassetid://1316045217"
+	penumbraShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	penumbraShadow.ImageTransparency = 0.880
+	penumbraShadow.ScaleType = Enum.ScaleType.Slice
+	penumbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
 
-UserInputService.InputChanged:Connect(function(input)
-	if input == dragInput and dragging then
-		update(input)
-	end
-end)
+	ambientShadow.Name = "ambientShadow"
+	ambientShadow.Parent = Shadow
+	ambientShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+	ambientShadow.BackgroundTransparency = 1.000
+	ambientShadow.Position = UDim2.new(0.5, 0, 0.5, 8)
+	ambientShadow.Size = UDim2.new(1, 10, 1, 10)
+	ambientShadow.ZIndex = 0
+	ambientShadow.Image = "rbxassetid://1316045217"
+	ambientShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	ambientShadow.ImageTransparency = 0.880
+	ambientShadow.ScaleType = Enum.ScaleType.Slice
+	ambientShadow.SliceCenter = Rect.new(10, 10, 118, 118)
 
-Library.Name = "Library"
-Library.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	UICorner.CornerRadius = UDim.new(0, 6)
+	UICorner.Parent = Shadow
 
-Holder.Name = "Holder"
-Holder.Parent = Library
+	Topbar.Name = "Topbar"
+	Topbar.Parent = Holder
+	Topbar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Topbar.BackgroundTransparency = 1.000
+	Topbar.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Topbar.BorderSizePixel = 0
+	Topbar.Size = UDim2.new(0, 400, 0, 31)
 
-UiFrame.Name = "UiFrame"
-UiFrame.Parent = Holder
-UiFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-UiFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-UiFrame.BackgroundTransparency = 0.050
-UiFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-UiFrame.BorderSizePixel = 0
-UiFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
-UiFrame.Size = UDim2.new(0, 370, 0, 270)
+	UICorner_2.CornerRadius = UDim.new(0, 6)
+	UICorner_2.Parent = Topbar
 
-Shadow.Name = "Shadow"
-Shadow.Parent = UiFrame
-
-shadowHolder.Name = "shadowHolder"
-shadowHolder.Parent = Shadow
-shadowHolder.BackgroundTransparency = 1.000
-shadowHolder.Size = UDim2.new(1, 0, 1, 0)
-shadowHolder.ZIndex = 0
-
-umbraShadow.Name = "umbraShadow"
-umbraShadow.Parent = shadowHolder
-umbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
-umbraShadow.BackgroundTransparency = 1.000
-umbraShadow.Position = UDim2.new(0.5, 0, 0.466666669, 9)
-umbraShadow.Size = UDim2.new(1, 12, 1, 12)
-umbraShadow.ZIndex = 0
-umbraShadow.Image = "rbxassetid://1316045217"
-umbraShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
-umbraShadow.ImageTransparency = 0.860
-umbraShadow.ScaleType = Enum.ScaleType.Slice
-umbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
-
-penumbraShadow.Name = "penumbraShadow"
-penumbraShadow.Parent = shadowHolder
-penumbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
-penumbraShadow.BackgroundTransparency = 1.000
-penumbraShadow.Position = UDim2.new(0.5, 0, 0.466666669, 9)
-penumbraShadow.Size = UDim2.new(1, 12, 1, 12)
-penumbraShadow.ZIndex = 0
-penumbraShadow.Image = "rbxassetid://1316045217"
-penumbraShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
-penumbraShadow.ImageTransparency = 0.880
-penumbraShadow.ScaleType = Enum.ScaleType.Slice
-penumbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
-
-ambientShadow.Name = "ambientShadow"
-ambientShadow.Parent = shadowHolder
-ambientShadow.AnchorPoint = Vector2.new(0.5, 0.5)
-ambientShadow.BackgroundTransparency = 1.000
-ambientShadow.Position = UDim2.new(0.5, 0, 0.48888889, 9)
-ambientShadow.Size = UDim2.new(1, 12, 1, 12)
-ambientShadow.ZIndex = 0
-ambientShadow.Image = "rbxassetid://1316045217"
-ambientShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
-ambientShadow.ImageTransparency = 0.880
-ambientShadow.ScaleType = Enum.ScaleType.Slice
-ambientShadow.SliceCenter = Rect.new(10, 10, 118, 118)
-
-UICorner.CornerRadius = UDim.new(0, 5)
-UICorner.Parent = UiFrame
-
-TabList.Name = "TabList"
-TabList.Parent = UiFrame
-
-Template.Name = "Template"
-Template.Parent = UiFrame
-
-Topbar.Name = "Topbar"
-Topbar.Parent = UiFrame
-
-TopbarFrame.Name = "TopbarFrame"
-TopbarFrame.Parent = Topbar
-TopbarFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-TopbarFrame.BackgroundTransparency = 1.000
-TopbarFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TopbarFrame.BorderSizePixel = 0
-TopbarFrame.Size = UDim2.new(0, 370, 0, 30)
-
-Line.Name = "Line"
-Line.Parent = Topbar
-Line.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-Line.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Line.BorderSizePixel = 0
-Line.Position = UDim2.new(0, 0, 0.122222222, 0)
-Line.Size = UDim2.new(0, 370, 0, 2)
-
-Title.Name = Title
-Title.Parent = Topbar
-Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Title.BackgroundTransparency = 1.000
-Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Title.BorderSizePixel = 0
-Title.Position = UDim2.new(0.229729727, 0, 0, 0)
-Title.Size = UDim2.new(0, 200, 0, 30)
-Title.Font = Enum.Font.SourceSansBold
-Title.Text = Title
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.TextSize = 20.000
-Title.RichText = true
-
-UIPadding.Parent = Title
-UIPadding.PaddingTop = UDim.new(0, 3)
+	Minimize.Name = "Minimize"
+	Minimize.Parent = Topbar
+	Minimize.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Minimize.BackgroundTransparency = 1.000
+	Minimize.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Minimize.BorderSizePixel = 0
+	Minimize.Position = UDim2.new(0.935000002, 0, 0.0967741907, 0)
+	Minimize.Size = UDim2.new(0, 20, 0, 20)
+	Minimize.Image = "rbxassetid://10734895530"
+	Minimize.MouseButton1Click:Connect(function()
+		Holder.Visible = false
+	end)
 	
-UserInputService.InputBegan:Connect(function(input) 
-	if input.KeyCode == Enum.KeyCode.Keybind then 
-		UiFrame = false
-	else
-		UiFrame.Visible = true
-	end
-end)
+	Hub.Name = "Hub"
+	Hub.Parent = Topbar
+	Hub.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Hub.BackgroundTransparency = 1.000
+	Hub.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Hub.BorderSizePixel = 0
+	Hub.Position = UDim2.new(0, 0, 0.0967741907, 0)
+	Hub.Size = UDim2.new(0, 400, 0, 31)
+	Hub.Font = Enum.Font.FredokaOne
+	Hub.Text = Title
+	Hub.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Hub.TextSize = 18.000
+
+	IconHub.Name = "IconHub"
+	IconHub.Parent = Topbar
+	IconHub.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	IconHub.BackgroundTransparency = 1.000
+	IconHub.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	IconHub.BorderSizePixel = 0
+	IconHub.Position = UDim2.new(0.0225000009, 0, 0, 0)
+	IconHub.Size = UDim2.new(0, 30, 0, 30)
+	IconHub.Image = Icon
+
+	UICorner_3.CornerRadius = UDim.new(0, 6)
+	UICorner_3.Parent = Holder
 	
-Line_2.Name = "Line"
-Line_2.Parent = TabList
-Line_2.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-Line_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Line_2.BorderSizePixel = 0
-Line_2.Position = UDim2.new(0.240540534, 0, 0.13333334, 0)
-Line_2.Size = UDim2.new(0, 2, 0, 234)
+	One.Name = "One"
+	One.Parent = Holder
+	One.Active = true
+	One.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	One.BackgroundTransparency = 1.000
+	One.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	One.BorderSizePixel = 0
+	One.Position = UDim2.new(0, 0, 0.13333334, 0)
+	One.Size = UDim2.new(0, 400, 0, 233)
+	One.CanvasSize = UDim2.new(0, 0, 20, 0)
+	One.ScrollBarThickness = 0
 
-Logo.Name = "Logo"
-Logo.Parent = Topbar
-Logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Logo.BackgroundTransparency = 1.000
-Logo.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Logo.BorderSizePixel = 0
-Logo.Position = UDim2.new(0.0162162166, 0, 0.00740740728, 0)
-Logo.Size = UDim2.new(0, 25, 0, 25)
-Logo.Image = Icon
+	Container.Name = "Container"
+	Container.Parent = One
+	Container.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Container.BackgroundTransparency = 1.000
+	Container.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Container.BorderSizePixel = 0
+	Container.Size = UDim2.new(0, 400, 0, 233)
 
-Minimize.Name = "Minimize"
-Minimize.Parent = Topbar
-Minimize.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Minimize.BackgroundTransparency = 1.000
-Minimize.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Minimize.BorderSizePixel = 0
-Minimize.Position = UDim2.new(0.85945946, 0, 0.0185185187, 0)
-Minimize.Size = UDim2.new(0, 20, 0, 20)
-Minimize.Image = "rbxassetid://10734896206"
-Minimize.MouseButton1Click:Connect(function()
-	local dropTween = TweenService:Create(UiFrame, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-		Size = UDim2.new(0, 0, 0, 0
-		)
-	})
-	
-	dropTween:Play()
-	UiFrame.Visible = false
-	
-end)
-Close.Name = "Close"
-Close.Parent = Topbar
-Close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Close.BackgroundTransparency = 1.000
-Close.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Close.BorderSizePixel = 0
-Close.Position = UDim2.new(0.9297297, 0, 0.0185185187, 0)
-Close.Size = UDim2.new(0, 20, 0, 20)
-Close.Image = "rbxassetid://10747384394"
-Close.MouseButton1Click:Connect(function()
-	local dropTween = TweenService:Create(UiFrame, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-		Size = UDim2.new(0, 0, 0, 0
-		)
-	})
-	
-	dropTween:Play()
-	Library:Destroy()
-	
-end)
+	UIListLayout.Parent = Container
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIAspectRatioConstraint.Parent = Holder
+	UIAspectRatioConstraint.AspectRatio = 1.481
+		local UserInputService = game:GetService("UserInputService")
 
-local selected
-function self:AddTab(tbl)
-local Title = tbl.Title
-		
-One_2.Name = Title
-One_2.Parent = Template
-One_2.Active = true
-One_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-One_2.BackgroundTransparency = 1.000
-One_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-One_2.BorderSizePixel = 0
-One_2.Position = UDim2.new(0.246000007, 0, 0.156000003, 0)
-One_2.Size = UDim2.new(0, 279, 0, 228)
-One_2.CanvasSize = UDim2.new(0, 0, 6, 0)
-One_2.ScrollBarThickness = 3
+		local gui = Holder
+		local topbar = Topbar
 
-FrameScroll.Name = "FrameScroll"
-FrameScroll.Parent = One_2
-FrameScroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-FrameScroll.BackgroundTransparency = 1.000
-FrameScroll.BorderColor3 = Color3.fromRGB(0, 0, 0)
-FrameScroll.BorderSizePixel = 0
-FrameScroll.Position = UDim2.new(-0.00848027691, 0, -0.00350885233, 0)
-FrameScroll.Size = UDim2.new(0, 279, 0, 228)
+		local dragging
+		local dragInput
+		local dragStart
+		local startPos
 
-UIListLayout_2.Parent = FrameScroll
-UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout_2.Padding = UDim.new(0, 4)
-		
-Scroll.Name = "Scroll"
-Scroll.Parent = TabList
-Scroll.Active = true
-Scroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Scroll.BackgroundTransparency = 1.000
-Scroll.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Scroll.BorderSizePixel = 0
-Scroll.Position = UDim2.new(0, 0, 0.129629627, 0)
-Scroll.Size = UDim2.new(0, 91, 0, 234)
-Scroll.CanvasSize = UDim2.new(0, 0, 5, 0)
-Scroll.ScrollBarThickness = 2
+		local function update(input)
+			local delta = input.Position - dragStart
+			gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		end
 
-UIListLayout.Parent = Scroll
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0, 5)
+		topbar.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+				dragging = true
+				dragStart = input.Position
+				startPos = gui.Position
 
-One.Name = Title
-One.Parent = Scroll
-One.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-One.BackgroundTransparency = 0.070
-One.BorderColor3 = Color3.fromRGB(0, 0, 0)
-One.BorderSizePixel = 0
-One.Size = UDim2.new(0, 85, 0, 25)
-One.Font = Enum.Font.ArialBold
-One.Text = Title
-One.TextColor3 = Color3.fromRGB(255, 255, 255)
-One.TextSize = 12.000
-		selected = Title
-		local tabs = script.Parent.Library.Holder.UiFrame.TabList.Scroll
-		local items = script.Parent.Library.Holder.UiFrame.Template
-
-		for i,v in pairs(tabs:GetChildren()) do
-			if v.ClassName == "TextButton" then
-				v.MouseButton1Click:Connect(function()
-					for i,v2 in pairs(items:GetChildren()) do
-						if v2.Name ~= v.Name then
-							v2.Visible = false
-
-						else
-							v2.Visible = true
-
-						end
-					end
-					for i,v3 in pairs(tabs:GetChildren()) do
-						if v3.Name ~= v.Name then
-							v.UIStroke.Enabled = false
-						else
-							v.UIStroke.Enabled = true
-						end
+				input.Changed:Connect(function()
+					if input.UserInputState == Enum.UserInputState.End then
+						dragging = false
 					end
 				end)
 			end
+		end)
+
+		topbar.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				dragInput = input
+			end
+		end)
+
+		UserInputService.InputChanged:Connect(function(input)
+			if input == dragInput and dragging then
+				update(input)
+			end
+		end)
+	function LIB:EditOpenButton(tbl)
+		local Icon = tbl.Icon
+		OpenButton.Name = "OpenButton"
+		OpenButton.Parent = NathubLibrary
+		OpenButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+		OpenButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		OpenButton.BorderSizePixel = 0
+		OpenButton.Position = UDim2.new(0.132459968, 0, 0.430830032, 0)
+		OpenButton.Size = UDim2.new(0, 40, 0, 40)
+		OpenButton.Image = Icon
+		OpenButton.MouseButton1Click:Connect(function()
+			if Holder.Visible == true or false then
+				Holder.Visible = false
+			else
+				Holder.Visible = true
+			end
+		end)
+		UICorner.CornerRadius = UDim.new(0, 5)
+		UICorner.Parent = OpenButton
+		
+		local UserInputService = game:GetService("UserInputService")
+
+		local dragging
+		local dragInput
+		local dragStart
+		local startPos
+
+		local function update(input)
+			local delta = input.Position - dragStart
+			OpenButton.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 		end
 
+		OpenButton.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+				dragging = true
+				dragStart = input.Position
+				startPos = OpenButton.Position
 
-UICorner_2.CornerRadius = UDim.new(0, 4)
-UICorner_2.Parent = One
+				input.Changed:Connect(function()
+					if input.UserInputState == Enum.UserInputState.End then
+						dragging = false
+					end
+				end)
+			end
+		end)
 
-function self:AddSection(tbl)
-local Title = tbl.Title	
-			
-Section.Name = Title
-Section.Parent = FrameScroll
-Section.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Section.BackgroundTransparency = 1.000
-Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section.BorderSizePixel = 0
-Section.Position = UDim2.new(0, 0, 0.0131578948, 0)
-Section.Size = UDim2.new(0, 279, 0, 18)
-Section.Font = Enum.Font.GothamBold
-Section.Text = Title
-Section.TextColor3 = Color3.fromRGB(255, 255, 255)
-Section.TextSize = 14.000
-			
-function self:AddParagraph(tbl)
-local Title = tbl.Title
-local Description = tbl.Description
+		OpenButton.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				dragInput = input
+			end
+		end)
 
-Paragraph.Name = Title
-Paragraph.Parent = FrameScroll
-Paragraph.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Paragraph.BackgroundTransparency = 1.000
-Paragraph.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Paragraph.BorderSizePixel = 0
-Paragraph.Position = UDim2.new(-5.46910002e-08, 0, 0.368421048, 0)
-Paragraph.Size = UDim2.new(0, 279, 0, 50)
-
-Title_4.Name = "Title"
-Title_4.Parent = Paragraph
-Title_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Title_4.BackgroundTransparency = 1.000
-Title_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Title_4.BorderSizePixel = 0
-Title_4.Position = UDim2.new(0.0237993356, 0, -0.0133331297, 0)
-Title_4.Size = UDim2.new(0, 209, 0, 18)
-Title_4.Font = Enum.Font.SourceSansBold
-Title_4.Text = Title
-Title_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title_4.TextSize = 14.000
-Title_4.TextXAlignment = Enum.TextXAlignment.Left
-
-Content.Name = "Content"
-Content.Parent = Paragraph
-Content.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Content.BackgroundTransparency = 1.000
-Content.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Content.BorderSizePixel = 0
-Content.Position = UDim2.new(0.0237993896, 0, 0.346666873, 0)
-Content.Size = UDim2.new(0, 271, 0, 30)
-Content.Font = Enum.Font.SourceSansBold
-Content.Text = Description
-Content.TextColor3 = Color3.fromRGB(100, 100, 100)
-Content.TextSize = 13.000
-Content.TextWrapped = true
-Content.TextXAlignment = Enum.TextXAlignment.Left
-
-UIPadding_2.Parent = Content
-UIPadding_2.PaddingBottom = UDim.new(0, 25)			
-end
-			
-function self:AddButton(tbl)
-local Title = tbl.Title
-local Callback = tbl.Callback
-				
-Button.Name = Title
-Button.Parent = FrameScroll
-Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Button.BackgroundTransparency = 1.000
-Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Button.BorderSizePixel = 0
-Button.Position = UDim2.new(0, 0, 0.092105262, 0)
-Button.Size = UDim2.new(0, 279, 0, 27)
-
-Title_3.Name = "Title"
-Title_3.Parent = Button
-Title_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Title_3.BackgroundTransparency = 1.000
-Title_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Title_3.BorderSizePixel = 0
-Title_3.Position = UDim2.new(0.0237993356, 0, 0.0666667819, 0)
-Title_3.Size = UDim2.new(0, 209, 0, 27)
-Title_3.Font = Enum.Font.SourceSansBold
-Title_3.Text = Title
-Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title_3.TextSize = 14.000
-Title_3.TextXAlignment = Enum.TextXAlignment.Left
-
-Lock.Name = "Lock"
-Lock.Parent = Button
-Lock.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Lock.BackgroundTransparency = 1.000
-Lock.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Lock.BorderSizePixel = 0
-Lock.Position = UDim2.new(0.792114675, 0, 0.185185179, 0)
-Lock.Size = UDim2.new(0, 20, 0, 20)
-Lock.Image = "rbxassetid://10734898194"
-Lock.MouseButton1Click:Connect(function()
-	pcall(Callback)		
-end)
-end
-			
-function self:AddToggle(tbl)
-local Title = tbl.Title
-local Callback = tbl.Callback
-				
-Toggle.Name = Title
-Toggle.Parent = FrameScroll
-Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Toggle.BackgroundTransparency = 1.000
-Toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Toggle.BorderSizePixel = 0
-Toggle.Position = UDim2.new(0, 0, 0.092105262, 0)
-Toggle.Size = UDim2.new(0, 279, 0, 27)
-
-Title_2.Name = "Title"
-Title_2.Parent = Toggle
-Title_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Title_2.BackgroundTransparency = 1.000
-Title_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Title_2.BorderSizePixel = 0
-Title_2.Position = UDim2.new(0.0237993356, 0, 0.0666667819, 0)
-Title_2.Size = UDim2.new(0, 209, 0, 27)
-Title_2.Font = Enum.Font.SourceSansBold
-Title_2.Text = Title
-Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title_2.TextSize = 14.000
-Title_2.TextXAlignment = Enum.TextXAlignment.Left
-				
-local ts,ti = game.TweenService,TweenInfo.new(.5,Enum.EasingStyle.Quint)
-
-local on1,on2,off1,off2 = ts:Create(Fill,ti,{ImageTransparency=0}), ts:Create(Knob,ti,{Position=UDim2.new(1.779, -39,0.5, 0)}),ts:Create(Fill,ti,{ImageTransparency=1}), ts:Create(Knob,ti,{Position=UDim2.new(1.113, -39,0.5, 0)})
-
-local state = script.Parent:GetAttribute("state")
-
-if state then
-	on1:Play()
-	on2:Play()
-else
-	off1:Play()
-	off2:Play()
-end	
-				
-Element.Name = "Element"
-Element.Parent = Toggle
-Element.AnchorPoint = Vector2.new(0.5, 0.5)
-Element.BackgroundTransparency = 1.000
-Element.BorderColor3 = Color3.fromRGB(27, 42, 53)
-Element.Position = UDim2.new(0.830089629, 0, 0.566666782, 0)
-Element.Size = UDim2.new(0, 30, 0, 14)
-Element.Image = "rbxasset://textures/ui/ImageSet/InGameMenu/img_set_1x_1.png"
-Element.ImageRectOffset = Vector2.new(287, 0)
-Element.ImageRectSize = Vector2.new(36, 36)
-Element.ImageTransparency = 0.300
-Element.ScaleType = Enum.ScaleType.Slice
-Element.SliceCenter = Rect.new(18, 18, 18, 18)
-Element.MouseButton1Click:Connect(function()
-state = script.Parent:GetAttribute("state")
+		UserInputService.InputChanged:Connect(function(input)
+			if input == dragInput and dragging then
+				update(input)
+			end
+		end)
+	end
+function FUNC:AddSection(tbl)
+	local Title = tbl.Title
+	local Section = Instance.new("TextLabel")
 	
+	Section.Name = Title
+	Section.Parent = Container
+	Section.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Section.BackgroundTransparency = 1.000
+	Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Section.BorderSizePixel = 0
+	Section.Size = UDim2.new(0, 400, 0, 30)
+	Section.Font = Enum.Font.SourceSansBold
+	Section.Text = Title
+	Section.TextColor3 = Color3.fromRGB(3, 234, 255)
+	Section.TextSize = 18
+end
+
+
+
+function FUNC:AddParagraph(tbl)
+	local Title = tbl.Title
+	local Description = tbl.Description
+	
+	local Paragraph = Instance.new("Frame")
+	local Title_2 = Instance.new("TextLabel")
+	local Desc = Instance.new("TextLabel")
+	local UIPadding = Instance.new("UIPadding")
+	Paragraph.Name = Title
+	Paragraph.Parent = Container
+	Paragraph.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Paragraph.BackgroundTransparency = 1.000
+	Paragraph.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Paragraph.BorderSizePixel = 0
+	Paragraph.Position = UDim2.new(0, 0, 0.386266083, 0)
+	Paragraph.Size = UDim2.new(0, 400, 0, 45)
+
+	Title_2.Name = "Title"
+	Title_2.Parent = Paragraph
+	Title_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title_2.BackgroundTransparency = 1.000
+	Title_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Title_2.BorderSizePixel = 0
+	Title_2.Position = UDim2.new(0.159999996, 0, 0, 0)
+	Title_2.Size = UDim2.new(0, 186, 0, 30)
+	Title_2.Font = Enum.Font.SourceSansBold
+	Title_2.Text = Title
+	Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title_2.TextSize = 14.000
+	Title_2.TextXAlignment = Enum.TextXAlignment.Left
+
+	Desc.Name = "Desc"
+	Desc.Parent = Paragraph
+	Desc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Desc.BackgroundTransparency = 1.000
+	Desc.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Desc.BorderSizePixel = 0
+	Desc.Position = UDim2.new(0.159999996, 0, 0.550000012, 0)
+	Desc.Size = UDim2.new(0, 278, 0, 20)
+	Desc.Font = Enum.Font.SourceSansBold
+	Desc.Text = Description
+	Desc.TextColor3 = Color3.fromRGB(85, 85, 85)
+	Desc.TextSize = 12.000
+	Desc.TextWrapped = true
+	Desc.TextXAlignment = Enum.TextXAlignment.Left
+
+	UIPadding.Parent = Desc
+	UIPadding.PaddingBottom = UDim.new(0, 12)
+end
+	
+	function FUNC:AddButton(tbl)
+		local Title = tbl.Title
+		local Callback = tbl.Callback
+		local G2L = {}
+		-- StarterGui.NathubLibrary.Holder.One.Container.Button
+		G2L["14"] = Instance.new("Frame", Container);
+		G2L["14"]["BorderSizePixel"] = 0;
+		G2L["14"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+		G2L["14"]["Size"] = UDim2.new(0, 400, 0, 30);
+		G2L["14"]["Position"] = UDim2.new(0, 0, 0.51502, 0);
+		G2L["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		G2L["14"]["Name"] = Title;
+		G2L["14"]["BackgroundTransparency"] = 1;
+
+
+		-- StarterGui.NathubLibrary.Holder.One.Container.Button.Title
+		G2L["15"] = Instance.new("TextLabel", G2L["14"]);
+		G2L["15"]["BorderSizePixel"] = 0;
+		G2L["15"]["TextSize"] = 14;
+		G2L["15"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+		G2L["15"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+		G2L["15"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+		G2L["15"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+		G2L["15"]["BackgroundTransparency"] = 1;
+		G2L["15"]["Size"] = UDim2.new(0, 186, 0, 30);
+		G2L["15"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		G2L["15"]["Text"] = [[Button]];
+		G2L["15"]["Name"] = Title;
+		G2L["15"]["Position"] = UDim2.new(0.16, 0, 0, 0);
+
+
+		-- StarterGui.NathubLibrary.Holder.One.Container.Button.Trigger
+		G2L["16"] = Instance.new("ImageButton", G2L["14"]);
+		G2L["16"]["BorderSizePixel"] = 0;
+		G2L["16"]["BackgroundColor3"] = Color3.fromRGB(31, 31, 31);
+		G2L["16"]["Image"] = [[rbxassetid://10734898592]];
+		G2L["16"]["Size"] = UDim2.new(0, 20, 0, 20);
+		G2L["16"]["BackgroundTransparency"] = 1;
+		G2L["16"]["Name"] = [[Trigger]];
+		G2L["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		G2L["16"]["Position"] = UDim2.new(0.805, 0, 0.13367, 0);
+		G2L["16"].MouseButton1Click:Connect(function()
+			pcall(Callback)
+		end)
+	end
+	
+function FUNC:AddToggle(tbl)
+	local Title = tbl.Title
+	local Callback = tbl.Callback
+	
+	local Toggle = Instance.new("Frame")
+	local Title_3 = Instance.new("TextLabel")
+	local Element = Instance.new("ImageButton")
+	local Knob = Instance.new("ImageLabel")
+	local Fill = Instance.new("ImageLabel")
+	
+	Toggle.Name = Title
+	Toggle.Parent = Container
+	Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Toggle.BackgroundTransparency = 1.000
+	Toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Toggle.BorderSizePixel = 0
+	Toggle.Size = UDim2.new(0, 400, 0, 30)
+
+	Title_3.Name = "Title"
+	Title_3.Parent = Toggle
+	Title_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title_3.BackgroundTransparency = 1.000
+	Title_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Title_3.BorderSizePixel = 0
+	Title_3.Position = UDim2.new(0.159999996, 0, 0, 0)
+	Title_3.Size = UDim2.new(0, 186, 0, 30)
+	Title_3.Font = Enum.Font.SourceSansBold
+	Title_3.Text = Title
+	Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title_3.TextSize = 14.000
+	Title_3.TextXAlignment = Enum.TextXAlignment.Left
+
+	Element.Name = "Element"
+	Element.Parent = Toggle
+	Element.AnchorPoint = Vector2.new(0.5, 0.5)
+	Element.BackgroundTransparency = 1.000
+	Element.BorderColor3 = Color3.fromRGB(27, 42, 53)
+	Element.Position = UDim2.new(0.805000007, 0, 0.5, 0)
+	Element.Size = UDim2.new(0, 30, 0, 14)
+	Element.Image = "rbxasset://textures/ui/ImageSet/InGameMenu/img_set_1x_1.png"
+	Element.ImageRectOffset = Vector2.new(287, 0)
+	Element.ImageRectSize = Vector2.new(36, 36)
+	Element.ImageTransparency = 0.300
+	Element.ScaleType = Enum.ScaleType.Slice
+	Element.SliceCenter = Rect.new(18, 18, 18, 18)
+	local ts,ti = game.TweenService,TweenInfo.new(.5,Enum.EasingStyle.Quint)
+
+	local on1,on2,off1,off2 = ts:Create(Fill,ti,{ImageTransparency=0}), ts:Create(Knob,ti,{Position=UDim2.new(1.779, -39,0.5, 0)}),ts:Create(Fill,ti,{ImageTransparency=1}), ts:Create(Knob,ti,{Position=UDim2.new(1.113, -39,0.5, 0)})
+
+	local state = script.Parent:GetAttribute("state")
+
 	if state then
-		script.Parent:SetAttribute("state",false)
-		off1:Play()
-		off2:Play()
-		pcall(Callback)				
-	else
-		script.Parent:SetAttribute("state",true)
 		on1:Play()
 		on2:Play()
-		pcall(Callback)					
+	else
+		off1:Play()
+		off2:Play()
 	end
-end)
-				
-Knob.Name = "Knob"
-Knob.Parent = Element
-Knob.AnchorPoint = Vector2.new(0, 0.5)
-Knob.BackgroundTransparency = 1.000
-Knob.BorderColor3 = Color3.fromRGB(27, 42, 53)
-Knob.Position = UDim2.new(1.77948713, -39, 0.5, 0)
-Knob.Size = UDim2.new(0, 20, 0, 20)
-Knob.ZIndex = 2
-Knob.Image = "rbxasset://textures/ui/ImageSet/InGameMenu/img_set_1x_1.png"
-Knob.ImageRectOffset = Vector2.new(0, 208)
-Knob.ImageRectSize = Vector2.new(42, 42)
+	Element.MouseButton1Click:Connect(function()
+		state = script.Parent:GetAttribute("state")
 
-Fill.Name = "Fill"
-Fill.Parent = Element
-Fill.BackgroundTransparency = 1.000
-Fill.BorderColor3 = Color3.fromRGB(27, 42, 53)
-Fill.Size = UDim2.new(1, 0, 1, 0)
-Fill.Image = "rbxasset://textures/ui/ImageSet/InGameMenu/img_set_1x_1.png"
-Fill.ImageColor3 = Color3.fromRGB(0, 251, 255)
-Fill.ImageRectOffset = Vector2.new(324, 0)
-Fill.ImageRectSize = Vector2.new(36, 36)
-Fill.ImageTransparency = 0.100
-Fill.ScaleType = Enum.ScaleType.Slice
-Fill.SliceCenter = Rect.new(18, 18, 18, 18)			
-end		
-			
-local Szmple = loadstring(game:HttpGet("https://raw.githubusercontent.com/WahidzSzz/WahidzSzz/refs/heads/main/SzmpleLibrary/Source.lua"))()
-			
-Szmple:EditOpenButton({
-	Icon = "rbxassset or lucide",
-	Size = UDim2.new(0, 40,0, 40),
-	Visible = true
-})
-			
-			Szmple:CreateWindow({
-				Title = "Szmple Library",
-				
-			})			
-			
-			
-			
-			
-			
-return self
+		if state then
+			script.Parent:SetAttribute("state",false)
+			off1:Play()
+				off2:Play()
+				pcall(Callback)
+		else
+			script.Parent:SetAttribute("state",true)
+			on1:Play()
+				on2:Play()
+				pcall(Callback)
+		end
+	end)
+	
+	Knob.Name = "Knob"
+	Knob.Parent = Element
+	Knob.AnchorPoint = Vector2.new(0, 0.5)
+	Knob.BackgroundTransparency = 1.000
+	Knob.BorderColor3 = Color3.fromRGB(27, 42, 53)
+	Knob.Position = UDim2.new(1.77948713, -39, 0.5, 0)
+	Knob.Size = UDim2.new(0, 20, 0, 20)
+	Knob.ZIndex = 2
+	Knob.Image = "rbxasset://textures/ui/ImageSet/InGameMenu/img_set_1x_1.png"
+	Knob.ImageRectOffset = Vector2.new(0, 208)
+	Knob.ImageRectSize = Vector2.new(42, 42)
+
+	Fill.Name = "Fill"
+	Fill.Parent = Element
+	Fill.BackgroundTransparency = 1.000
+	Fill.BorderColor3 = Color3.fromRGB(27, 42, 53)
+	Fill.Size = UDim2.new(1, 0, 1, 0)
+	Fill.Image = "rbxasset://textures/ui/ImageSet/InGameMenu/img_set_1x_1.png"
+	Fill.ImageColor3 = Color3.fromRGB(0, 213, 217)
+	Fill.ImageRectOffset = Vector2.new(324, 0)
+	Fill.ImageRectSize = Vector2.new(36, 36)
+	Fill.ScaleType = Enum.ScaleType.Slice
+	Fill.SliceCenter = Rect.new(18, 18, 18, 18)
 end
+
+
+	
+return FUNC
+end
+
+
 return LIB
-end
-end
 local assets = {
 	["accessibility"] = "rbxassetid://10709751939",
 	["activity"] = "rbxassetid://10709752035",
