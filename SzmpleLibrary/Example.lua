@@ -1,4 +1,4 @@
-local Szmple = loadstring(game:HttpGet("https://raw.githubusercontent.com/WahidzSzz/WahidzSzz/refs/heads/main/SzmpleSzmplerary/Source.lua"))()
+local Szmple = loadstring(game:HttpGet("https://raw.githubusercontent.com/WahidzSzz/WahidzSzz/refs/heads/main/SzmpleLibrary/Source.lua"))()
 			
 Szmple:CreateWindow({
 	Title = "WINDOW",
