@@ -1,33 +1,36 @@
 local Szmple = loadstring(game:HttpGet("https://raw.githubusercontent.com/WahidzSzz/WahidzSzz/refs/heads/main/SzmpleLibrary/Source.lua"))()
 			
 Szmple:CreateWindow({
-	Title = "WINDOW",
-	Icon = "icon"
-})
-
-Szmple:EditOpenButton({
-	Icon = ""
+	Title = "Window"
 })
 
 Szmple:AddSection({
-	Title = "Section"
-})
-
-Szmple:AddParagraph({
-	Title = "paragraphj",
-	Description = "desc"
+	Title = "section",
+	TextColor = Color3.fromRGB(255, 255, 255)
 })
 
 Szmple:AddButton({
-	Title = "button",
-	Callback = Szmpletion()
-	print("callback")
-	end
+	Title = "Button",
+	Callback = function()
+		print("callback")
+	end,
 })
 
 Szmple:AddToggle({
-	Title = "toggle",
-	Callback = Szmpletion()
+	Title = "Toggle",
+	Callback = function()
 		print("callback")
-	end
+	end,
+})
+
+Szmple:AddSlider({
+	Title = "Slider",
+	MaxValue = 300,
+	Callback = function(Value)
+	end,
+})
+
+LIB:AddParagraph({
+	Title = "Paragraph",
+	Desc = "desc"
 })
